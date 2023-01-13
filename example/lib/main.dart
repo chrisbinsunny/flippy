@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: DragFlipper(
-                dragAxis: DragAxis.both,
+                dragAxis: DragAxis.horizontal,
                 frontSide: LayoutBuilder(
                     builder: (p0, constraints) {
                       return Column(
