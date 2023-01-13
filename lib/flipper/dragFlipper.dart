@@ -16,52 +16,50 @@ class ContactCard extends StatefulWidget {
 
 class _ContactCardState extends State<ContactCard> with SingleTickerProviderStateMixin{
 
-  late AnimationController controller;
+  late AnimationController animationController;
   late Animation<double> animation;
-  double dragPosition = 0;
+  double drag = 0;
   bool isFront = true, isFrontStart=true;
 
-  Widget frontSide= Container();
-  Widget back = Container();
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
+    animationController = AnimationController(
       duration: const Duration (milliseconds: 500),
       vsync: this,
     );
 
-    controller.addListener(() {
+    animationController.addListener(() {
       setState(() {
-        dragPosition = animation.value;
-        setImageSide();
+        drag = animation.value;
+        findSide();
       });
     });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final angle = dragPosition / 180 * pi;
+    final angle = drag / 180 * pi;
     final transform = Matrix4.identity()
       ..setEntry(3, 2, 0.001)
       ..rotateY(angle);
     return GestureDetector(
       onHorizontalDragStart: (details){
-        controller.stop();
+        animationController.stop();
         isFrontStart= isFront;
       },
       onHorizontalDragUpdate: (details) {
         setState(() {
-          dragPosition -= details.delta.dx;
-          dragPosition %= 360;
-          setImageSide();
+          drag -= details.delta.dx;
+          drag %= 360;
+          findSide();
         });
       },
       onHorizontalDragEnd: (details){
@@ -70,10 +68,10 @@ class _ContactCardState extends State<ContactCard> with SingleTickerProviderStat
           isFront = !isFrontStart;
         }
         animation = Tween<double>(
-          begin: dragPosition,
-          end: isFront? (dragPosition > 180 ? 360:0):180,
-        ).animate (controller);
-        controller.forward(from: 0);
+          begin: drag,
+          end: isFront? (drag > 180 ? 360:0):180,
+        ).animate (animationController);
+        animationController.forward(from: 0);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -85,13 +83,25 @@ class _ContactCardState extends State<ContactCard> with SingleTickerProviderStat
             alignment: Alignment.center,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: isFront ?
-              widget.frontSide :
-              Transform(
-                transform: Matrix4.identity()
-                  ..rotateY(pi),
-                alignment: Alignment.center,
-                child: widget.back,
+              child: Container(
+                height: 384,
+                width: 240,
+                padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 12  //12
+                ),
+                decoration: BoxDecoration(
+                    color: const Color(0xff0c0c0c),
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child: isFront ?
+                widget.frontSide :
+                Transform(
+                  transform: Matrix4.identity()
+                    ..rotateY(pi),
+                  alignment: Alignment.center,
+                  child: widget.back,
+                ),
               ),
             ),
           ),
@@ -105,8 +115,8 @@ class _ContactCardState extends State<ContactCard> with SingleTickerProviderStat
   }
 
 
-  void setImageSide() {
-    if (dragPosition <= 90 || dragPosition >= 270) {
+  void findSide() {
+    if (drag <= 90 || drag >= 270) {
       isFront = true;
     } else {
       isFront = false;
@@ -114,7 +124,7 @@ class _ContactCardState extends State<ContactCard> with SingleTickerProviderStat
   }
 
   getWidth(){
-    return dragPosition>180?(130+(180-dragPosition)*1.44):130-(dragPosition*1.44);
+    return drag>180?(130+(180-drag)*1.44):130-(drag*1.44);
   }
 
 
