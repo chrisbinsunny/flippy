@@ -26,7 +26,7 @@ class _DragFlipperState extends State<DragFlipper> with SingleTickerProviderStat
 
   late AnimationController animationController;
   late Animation<double> animation;
-  double dragHorizontal = 0;
+  double dragHorizontal = 0, dragVertical = 0;
   bool isFront = true, isFrontStart=true;
   void Function(DragStartDetails)? onVerticalDragStart, onHorizontalDragStart;
   void Function(DragUpdateDetails)? onVerticalDragUpdate, onHorizontalDragUpdate;
@@ -34,18 +34,55 @@ class _DragFlipperState extends State<DragFlipper> with SingleTickerProviderStat
 
   @override
   void initState() {
-    super.initState();
     animationController = AnimationController(
       duration: const Duration (milliseconds: 500),
       vsync: this,
     );
 
-    animationController.addListener(() {
-      setState(() {
-        dragHorizontal = animation.value;
-        findSide();
-      });
-    });
+        switch(widget.dragAxis){
+          case DragAxis.horizontal:
+            onHorizontalDragStart=horizontalDragStart;
+            onHorizontalDragUpdate=horizontalDragUpdate;
+            onHorizontalDragEnd=horizontalDragEnd;
+            onVerticalDragStart= null;
+            onVerticalDragUpdate=null;
+            onVerticalDragEnd=null;
+            animationController.addListener(() {
+              setState(() {
+                dragHorizontal = animation.value;
+                findSide();
+              });
+            });
+            break;
+          case DragAxis.vertical:
+            onHorizontalDragStart=null;
+            onHorizontalDragUpdate=null;
+            onHorizontalDragEnd=null;
+            onVerticalDragStart= verticalDragStart;
+            onVerticalDragUpdate=verticalDragUpdate;
+            onVerticalDragEnd=verticalDragEnd;
+            animationController.addListener(() {
+              setState(() {
+                dragVertical = animation.value;
+                findSide();
+              });
+            });
+            break;
+          case DragAxis.both:
+            onHorizontalDragStart=horizontalDragStart;
+            onHorizontalDragUpdate=horizontalDragUpdate;
+            onHorizontalDragEnd=horizontalDragEnd;
+            onVerticalDragStart= verticalDragStart;
+            onVerticalDragUpdate=verticalDragUpdate;
+            onVerticalDragEnd=verticalDragEnd;
+            break;
+        }
+
+
+
+
+        super.initState();
+
   }
 
   @override
@@ -56,24 +93,65 @@ class _DragFlipperState extends State<DragFlipper> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final angle = dragHorizontal / 180 * pi;
-    final transform = Matrix4.identity()
+    final angleHorizontal = dragHorizontal / 180 * pi;
+    final angleVertical = dragVertical / 180 * pi;
+
+    final transformHorizontal = Matrix4.identity()
       ..setEntry(3, 2, 0.001)
-      ..rotateY(angle);
+      ..rotateY(angleHorizontal);
+
+    final transformVertical = Matrix4.identity()
+      ..setEntry(3, 2, 0.001)
+      ..rotateX(angleVertical);
+
+    final transformBoth = Matrix4.identity()
+      ..setEntry(3, 2, 0.001)
+      ..rotateX(angleVertical)
+      ..rotateY(angleHorizontal);
+
     return GestureDetector(
-      onHorizontalDragStart: horizontalDragStart,
-      onHorizontalDragUpdate: horizontalDragUpdate,
-      onHorizontalDragEnd: horizontalDragEnd,
-      onVerticalDragStart: null,
-      onVerticalDragUpdate: null,
-      onVerticalDragEnd: null,
+      // onHorizontalDragStart: onHorizontalDragStart,
+      // onHorizontalDragUpdate: onHorizontalDragUpdate,
+      // onHorizontalDragEnd: onHorizontalDragEnd,
+      // onVerticalDragStart: onVerticalDragStart,
+      // onVerticalDragUpdate: onVerticalDragUpdate,
+      // onVerticalDragEnd: onVerticalDragEnd,
+      onPanStart: (a){
+        animationController.stop();
+      isFrontStart = isFront;},
+      onPanUpdate: (a){
+        setState(() {
+          dragHorizontal -= a.delta.dx;
+          dragHorizontal %= 360;
+          dragVertical += a.delta.dy;
+          dragVertical %= 360;
+          findSide();
+        });
+      },
+      onPanEnd: (a){
+        final velocity = a.velocity.pixelsPerSecond.dy.abs();
+        if (velocity >= 100) {
+          isFront = !isFrontStart;
+        }
+        animation = Tween<double>(
+          begin: dragVertical,
+          end: isFront ? (dragVertical > 180 ? 360 : 0) : 180,
+        ).animate(animationController);
+        animationController.forward(from: 0);
+      },
+
+
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
 
           Transform(
-            transform: transform,
+            transform: widget.dragAxis == DragAxis.horizontal
+                ? transformHorizontal
+                : widget.dragAxis == DragAxis.vertical
+                ? transformVertical
+                : transformBoth,
             alignment: Alignment.center,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -110,42 +188,56 @@ class _DragFlipperState extends State<DragFlipper> with SingleTickerProviderStat
 
 
   void findSide() {
-    if (dragHorizontal <= 90 || dragHorizontal >= 270) {
-      isFront = true;
-    } else {
-      isFront = false;
+
+    if(widget.dragAxis==DragAxis.horizontal){
+      if (dragHorizontal <= 90 || dragHorizontal >= 270) {
+        isFront = true;
+      } else {
+        isFront = false;
+      }
+    }else{
+      if (dragVertical <= 90 || dragVertical >= 270) {
+        isFront = true;
+      } else {
+        isFront = false;
+      }
     }
+
   }
+
+
+
+
 
   getWidth(){
     return dragHorizontal>180?(130+(180-dragHorizontal)*1.44):130-(dragHorizontal*1.44);
   }
 
 
-  // void verticalDragStart(DragStartDetails details) {
-  //   animationController.stop();
-  //   isFrontStart = isFront;
-  // }
-  //
-  // void verticalDragUpdate(DragUpdateDetails details) {
-  //   setState(() {
-  //     dragX += details.delta.dy;
-  //     dragX %= 360;
-  //     findSide();
-  //   });
-  // }
-  //
-  // void verticalDragEnd(DragEndDetails details) {
-  //   final velocity = details.velocity.pixelsPerSecond.dy.abs();
-  //   if (velocity >= 100) {
-  //     isFront = !isFrontStart;
-  //   }
-  //   animation = Tween<double>(
-  //     begin: dragX,
-  //     end: isFront ? (dragX > 180 ? 360 : 0) : 180,
-  //   ).animate(animationController);
-  //   animationController.forward(from: 0);
-  // }
+  void verticalDragStart(DragStartDetails details) {
+    animationController.stop();
+    isFrontStart = isFront;
+  }
+
+  void verticalDragUpdate(DragUpdateDetails details) {
+    setState(() {
+      dragVertical += details.delta.dy;
+      dragVertical %= 360;
+      findSide();
+    });
+  }
+
+  void verticalDragEnd(DragEndDetails details) {
+    final velocity = details.velocity.pixelsPerSecond.dy.abs();
+    if (velocity >= 100) {
+      isFront = !isFrontStart;
+    }
+    animation = Tween<double>(
+      begin: dragVertical,
+      end: isFront ? (dragVertical > 180 ? 360 : 0) : 180,
+    ).animate(animationController);
+    animationController.forward(from: 0);
+  }
 
   void horizontalDragStart(DragStartDetails details) {
     animationController.stop();
