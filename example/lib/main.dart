@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: DragFlipper(
-                dragAxis: DragAxis.horizontal,
-    frontSide: LayoutBuilder(
+                dragAxis: DragAxis.both,
+                frontSide: LayoutBuilder(
                     builder: (p0, constraints) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,119 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
-                          const Spacer(),
-                          SizedBox(
-                            width: constraints.maxWidth*0.42,
-                            child: FittedBox(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 11,
-                                  ),
-                                  Text(
-                                    "  chrisbinsunny",
-                                    style: TextStyle(
-                                      fontSize: 7,
-                                      fontWeight: FontWeight.w200,
-                                      letterSpacing: 1,
-                                      height: 1.7,
-                                      fontFamily: "Gilroy",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          SizedBox(
-                            width: constraints.maxWidth*0.42,
-
-                            child: FittedBox(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 11,
-                                  ),
-                                  Text(
-                                    "  chrisbinsunny",
-                                    style: TextStyle(
-                                      fontSize: 7,
-                                      fontWeight: FontWeight.w100,
-                                      letterSpacing: 1,
-                                      height: 1.7,
-                                      fontFamily: "Gilroy",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          SizedBox(
-                              width: constraints.maxWidth*0.42,
-
-                              child: FittedBox(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                      size: 11,
-                                    ),
-                                    Text(
-                                      "  chrisbinsunny",
-                                      style: TextStyle(
-                                        fontSize: 7,
-                                        fontWeight: FontWeight.w100,
-                                        letterSpacing: 1,
-                                        height: 1.7,
-                                        fontFamily: "Gilroy",
-                                      ),
-                                    ),
-                                  ],
-                                ),)),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          SizedBox(
-                              width: constraints.maxWidth*0.64,
-
-                              child: FittedBox(
-                                child:
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                      size: 10,
-                                    ),
-                                    Text(
-                                      "  chrisbinsunny.github.io",
-                                      style: TextStyle(
-                                        fontSize: 7,
-                                        fontWeight: FontWeight.w100,
-                                        letterSpacing: 1,
-                                        height: 1.7,
-                                        fontFamily: "Gilroy",
-                                      ),
-                                    ),
-                                  ],
-                                ),))
 
                         ],
                       );}
@@ -218,17 +105,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 150,
+                          height: 155,
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
+
                         SizedBox(
                           width: constraints.maxWidth*0.65,
                           child: const FittedBox(
                             child: Text(" Chrisbin Sunny",
                               style: TextStyle(
                                   fontSize: 24,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w600
                               ),
                             ),
@@ -281,29 +167,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        const Spacer(),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const FlutterLogo(
-                              size: 20,
-                            ),
-                            Text(
-                              " FlutterDev",
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  color: null,
-                                  fontFamily: "Gilroy",
-                                  fontWeight: FontWeight.w500,
-                                  foreground: Paint()..shader=const LinearGradient(
-                                      colors: <Color>[Color(0xff5dc8f8), Color(0xff065a9d)],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter
-                                  ).createShader(const Rect.fromLTWH(0.0, 0.0, 50.0, 20.0))
-                              ),
-                            )
-                          ],
-                        )
                       ],
                     );
                   },),
