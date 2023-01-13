@@ -1,3 +1,4 @@
+import 'package:flipper/constants/parameters.dart';
 import 'package:flipper/flipper.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
-              child: ContactCard(
-                frontSide: LayoutBuilder(
+              child: DragFlipper(
+                dragAxis: DragAxis.horizontal,
+    frontSide: LayoutBuilder(
                     builder: (p0, constraints) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,3 +315,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
