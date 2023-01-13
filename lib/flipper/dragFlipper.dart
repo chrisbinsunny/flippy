@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'dart:developer' as dev;
 import 'package:flipper/constants/parameters.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -63,7 +63,7 @@ class _DragFlipperState extends State<DragFlipper>
         onPanEnd = bothDragEnd;
         animationController.addListener(() {
           setState(() {
-            dragVertical = animationVertical.value;
+            //dragVertical = animationVertical.value;
             dragHorizontal = animationHorizontal.value;
             findSide();
           });
@@ -156,7 +156,7 @@ class _DragFlipperState extends State<DragFlipper>
         isFront = false;
       }
     } else
-    //if(widget.dragAxis==DragAxis.vertical)
+    if(widget.dragAxis==DragAxis.vertical)
     {
       if (dragVertical <= 90 || dragVertical >= 270) {
         isFront = true;
@@ -164,14 +164,22 @@ class _DragFlipperState extends State<DragFlipper>
         isFront = false;
       }
     }
-    // else{
-    //   final biggerDrag= dragHorizontal<dragVertical?dragVertical:dragHorizontal;
-    //   if (biggerDrag <= 90 || biggerDrag >= 270) {
-    //     isFront = true;
-    //   } else {
-    //     isFront = false;
-    //   }
-    // }
+    else{
+
+      dev.log(isFront?"Front":"Back");
+
+      if (dragVertical <= 90 || dragVertical >= 270) {
+        isFront = true;
+      } else {
+        isFront = false;
+      }
+      if (dragHorizontal <= 90 || dragHorizontal >= 270) {
+        isFront = true;
+      } else {
+        isFront = false;
+      }
+
+    }
   }
 
   getWidth() {
@@ -221,12 +229,13 @@ class _DragFlipperState extends State<DragFlipper>
   }
 
   void bothDragUpdate(DragUpdateDetails details) {
+    dragHorizontal -= details.delta.dx;
+    dragHorizontal %= 360;
+    dragVertical += details.delta.dy;
+    dragVertical %= 360;
+    findSide();
     setState(() {
-      dragHorizontal -= details.delta.dx;
-      dragHorizontal %= 360;
-      dragVertical += details.delta.dy;
-      dragVertical %= 360;
-      findSide();
+
     });
   }
 
