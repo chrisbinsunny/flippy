@@ -260,10 +260,10 @@ class _DragFlipperState extends State<DragFlipper>
   void bothDragEnd(DragEndDetails details) {
     final yVelocity = details.velocity.pixelsPerSecond.dy.abs();
     final xVelocity = details.velocity.pixelsPerSecond.dx.abs();
-    // if ((yVelocity >= 100) || (xVelocity >= 100)) {
-    //   dev.log(isFrontStart.toString());
-    //   isFront = !isFrontStart;
-    // }
+    if ((yVelocity >= 100) || (xVelocity >= 100)) {
+      dev.log(isFrontStart.toString());
+      isFront = !isFrontStart;
+    }
 
     final double end=isFront ? (dragVertical > 180 ? isInverted?180:360 : isInverted?180:0) : isInverted?180:dragVertical>180?360:0;
     dev.log(
