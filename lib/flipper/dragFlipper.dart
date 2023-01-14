@@ -86,6 +86,8 @@ class _DragFlipperState extends State<DragFlipper>
 ///A function that is called when the drag gesture is ended.
   void Function(DragEndDetails)? onPanEnd;
 
+  ///[transform] is used to store the kind of transform needed for the Flipper. Value to be added inside build.
+  late Matrix4 transform;
   @override
   void initState() {
     animationController = AnimationController(
@@ -141,6 +143,25 @@ class _DragFlipperState extends State<DragFlipper>
     final angleHorizontal = dragHorizontal / 180 * pi;
     final angleVertical = dragVertical / 180 * pi;
 
+    switch(widget.dragAxis){
+      case DragAxis.horizontal:
+        transform = Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateY(angleHorizontal);
+        break;
+      case DragAxis.vertical:
+        transform = Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateX(angleVertical);
+        break;
+      case DragAxis.both:
+        transform = Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateX(angleVertical)
+          ..rotateY(angleHorizontal);
+        break;
+    }
+
     final transformHorizontal = Matrix4.identity()
       ..setEntry(3, 2, 0.001)
       ..rotateY(angleHorizontal);
@@ -166,11 +187,7 @@ class _DragFlipperState extends State<DragFlipper>
         mainAxisSize: MainAxisSize.min,
         children: [
           Transform(
-            transform: widget.dragAxis == DragAxis.horizontal
-                ? transformHorizontal
-                : widget.dragAxis == DragAxis.vertical
-                    ? transformVertical
-                    : transformBoth,
+            transform: transform,
             alignment: Alignment.center,
             child: ClipRRect(
               borderRadius: widget.borderRadius,
