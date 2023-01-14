@@ -13,7 +13,11 @@ class DragFlipper extends StatefulWidget {
       required this.back,
         this.height=384,
         this.width=240,
-      this.dragAxis = DragAxis.horizontal});
+      this.dragAxis = DragAxis.horizontal,
+        this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        this.backgroundColor= const Color(0xff0c0c0c),
+        this.borderRadius= const BorderRadius.all(Radius.circular(8.0)),
+      });
 
 
   /// The [Widget] to be shown on the front of the Flipper. This is the first screen shown in Flipper.
@@ -36,18 +40,50 @@ class DragFlipper extends StatefulWidget {
   /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
 
+  /// The [padding] to be applied inside the Flipper.
+  ///
+  /// Defaults to:
+  /// ```dart
+  /// const EdgeInsets.symmetric(vertical: 8, horizontal: 12)
+  /// ```
+  final EdgeInsets padding;
 
+  final Color backgroundColor;
+  final BorderRadiusGeometry borderRadius;
   @override
   State<DragFlipper> createState() => _DragFlipperState();
 }
 
 class _DragFlipperState extends State<DragFlipper>
     with SingleTickerProviderStateMixin {
+
+  ///[AnimationController] to control the animation of the flipper after it is dragged. Used to restore
+  ///the flipper to default state or straight state.
   late AnimationController animationController;
+
+  ///[Animation] objects that control the animation of the flipper along the
+  /// vertical and horizontal axis respectively. Controls where the flipper should be turning to after drag.
   late Animation<double> animationVertical, animationHorizontal;
+
+  ///A [double] variable that stores the current drag value of the flipper along the horizontal and vertical axis.
   double dragHorizontal = 0, dragVertical = 0;
-  bool isFront = true, isFrontStart = true, isInverted=false;
+
+  ///[isFront] is a boolean variable that indicates whether the front side of the flipper is
+  ///currently being displayed.
+  bool isFront = true;
+
+  ///[isFrontStart] is a boolean variable that indicates whether the front side of
+  ///the flipper was displayed at the start of the drag gesture. Used for inverting side if ```velocity>100```
+  bool isFrontStart = true;
+
+  ///[isInverted] is a boolean variable that indicates whether the current viewport shows the flipper in
+  ///inverted or vertically flipped view.
+  bool isInverted=false;
+
+  ///A function that is called when the drag gesture is updated.
   void Function(DragUpdateDetails)? onPanUpdate;
+
+///A function that is called when the drag gesture is ended.
   void Function(DragEndDetails)? onPanEnd;
 
   @override
@@ -137,16 +173,15 @@ class _DragFlipperState extends State<DragFlipper>
                     : transformBoth,
             alignment: Alignment.center,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: widget.borderRadius,
               child: Container(
                 height: widget.height,
                 width: widget.width,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12 //12
-                        ),
+                padding: widget.padding,
                 decoration: BoxDecoration(
-                    color: const Color(0xff0c0c0c),
-                    borderRadius: BorderRadius.circular(8)),
+                    color: widget.backgroundColor,
+                    borderRadius: widget.borderRadius,
+                ),
                 child: isFront
                     ? widget.front
                     : Transform(
