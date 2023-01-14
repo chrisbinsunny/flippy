@@ -247,9 +247,13 @@ class _DragFlipperState extends State<DragFlipper>
   }
 
   void bothDragUpdate(DragUpdateDetails details) {
-    dragHorizontal -= details.delta.dx;
-    dragHorizontal %= 360;
+    if(isInverted){
+      dragHorizontal += details.delta.dx;
+    }else {
+      dragHorizontal -= details.delta.dx;
+    }
     dragVertical += details.delta.dy;
+    dragHorizontal %= 360;
     dragVertical %= 360;
     findSide();
     setState(() {
