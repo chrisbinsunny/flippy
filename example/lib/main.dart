@@ -43,7 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: DragFlipper(
                 dragAxis: DragAxis.both,
-                frontSide: LayoutBuilder(
+
+                front: LayoutBuilder(
                     builder: (p0, constraints) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
