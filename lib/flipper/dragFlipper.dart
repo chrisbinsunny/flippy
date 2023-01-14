@@ -261,25 +261,21 @@ class _DragFlipperState extends State<DragFlipper>
     final yVelocity = details.velocity.pixelsPerSecond.dy.abs();
     final xVelocity = details.velocity.pixelsPerSecond.dx.abs();
     if ((yVelocity >= 100) || (xVelocity >= 100)) {
-      dev.log(isFrontStart.toString());
       isFront = !isFrontStart;
+      if(yVelocity>xVelocity){
+        isInverted=!isInverted;
+      }
     }
 
-    final double end=isFront ? (dragVertical > 180 ? isInverted?180:360 : isInverted?180:0) : isInverted?180:dragVertical>180?360:0;
-    dev.log(
-      "\nanimationVertical: \nbegin= $dragVertical, end= $end\n"
-          "animationHorizontal: \nbegin= $dragHorizontal, end= ${isFront ? (dragHorizontal > 180 ? isInverted?180:360 : isInverted?180:0) : isInverted?0:180}"
-    );
 
     animationVertical = Tween<double>(
       begin: dragVertical,
-      end: end,
+      end: isInverted?180:(dragVertical > 180 ? 360 : 0),
     ).animate(animationController);
-    //animationController.forward(from: 0);
 
     animationHorizontal = Tween<double>(
       begin: dragHorizontal,
-      end: isFront ? (dragHorizontal > 180 ? isInverted?180:360 : isInverted?180:0) : isInverted?dragHorizontal>180?360:0:180,
+      end: isFront ? (isInverted?180:(dragHorizontal>180?360:0)) : isInverted ? (dragHorizontal>180?360:0):180,
     ).animate(animationController);
 
     animationController.forward(from: 0);
