@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:developer' as dev;
 import 'package:flipper/constants/parameters.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../components/blurPainter.dart';
@@ -10,13 +9,34 @@ import '../components/blurPainter.dart';
 class DragFlipper extends StatefulWidget {
   const DragFlipper(
       {super.key,
-      required this.frontSide,
+      required this.front,
       required this.back,
+        this.height=384,
+        this.width=240,
       this.dragAxis = DragAxis.horizontal});
 
-  final Widget frontSide;
+
+  /// The [Widget] to be shown on the front of the Flipper. This is the first screen shown in Flipper.
+  /// [front] can be an [Image.asset], [Container] or any other widgets.
+  final Widget front;
+
+  /// The [Widget] to be shown on the back of the Flipper. This is the back screen shown in Flipper.
+  /// [back] can be an [Image.asset], [Container] or any other widgets.
   final Widget back;
+
+  /// The [height] of the Flipper. The shadow is outside of the given height.
+  /// The height is only for the interactive area of the Flipper. Defaults to 384.
+  final double height;
+
+  /// The [width] of the Flipper. The width is only for the interactive area of the Flipper.
+  /// Defaults to 240.
+  final double width;
+
+  /// The [DragAxis] on which the Flipper should be dragged. This is not the axis of rotation.
+  /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
+
+
   @override
   State<DragFlipper> createState() => _DragFlipperState();
 }
@@ -119,8 +139,8 @@ class _DragFlipperState extends State<DragFlipper>
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Container(
-                height: 384,
-                width: 240,
+                height: widget.height,
+                width: widget.width,
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12 //12
                         ),
@@ -128,7 +148,7 @@ class _DragFlipperState extends State<DragFlipper>
                     color: const Color(0xff0c0c0c),
                     borderRadius: BorderRadius.circular(8)),
                 child: isFront
-                    ? widget.frontSide
+                    ? widget.front
                     : Transform(
                         transform: Matrix4.identity()..rotateY(pi),
                         alignment: Alignment.center,
@@ -166,12 +186,9 @@ class _DragFlipperState extends State<DragFlipper>
     }
     else{
 
-      //dev.log(isFront?"Front":"Back");
-
       if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
         isFront=true;
         isInverted=false;
-
       }
       else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
         isFront=true;
@@ -185,17 +202,6 @@ class _DragFlipperState extends State<DragFlipper>
         isFront=false;
         isInverted=false;
       }
-
-      // if (dragVertical <= 90 || dragVertical >= 270) {
-      //   isFront = true;
-      // } else {
-      //   isFront = false;
-      // }
-      // if (dragHorizontal <= 90 || dragHorizontal >= 270) {
-      //   isFront = true;
-      // } else {
-      //   isFront = false;
-      // }
 
     }
   }
