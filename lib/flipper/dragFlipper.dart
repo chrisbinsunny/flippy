@@ -140,40 +140,25 @@ class _DragFlipperState extends State<DragFlipper>
 
   @override
   Widget build(BuildContext context) {
-    final angleHorizontal = dragHorizontal / 180 * pi;
-    final angleVertical = dragVertical / 180 * pi;
 
     switch(widget.dragAxis){
       case DragAxis.horizontal:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
-          ..rotateY(angleHorizontal);
+          ..rotateY(dragHorizontal / 180 * pi);
         break;
       case DragAxis.vertical:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
-          ..rotateX(angleVertical);
+          ..rotateX(dragVertical / 180 * pi);
         break;
       case DragAxis.both:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
-          ..rotateX(angleVertical)
-          ..rotateY(angleHorizontal);
+          ..rotateX(dragVertical / 180 * pi)
+          ..rotateY(dragHorizontal / 180 * pi);
         break;
     }
-
-    final transformHorizontal = Matrix4.identity()
-      ..setEntry(3, 2, 0.001)
-      ..rotateY(angleHorizontal);
-
-    final transformVertical = Matrix4.identity()
-      ..setEntry(3, 2, 0.001)
-      ..rotateX(angleVertical);
-
-    final transformBoth = Matrix4.identity()
-      ..setEntry(3, 2, 0.001)
-      ..rotateX(angleVertical)
-      ..rotateY(angleHorizontal);
 
     return GestureDetector(
       onPanStart: (detail) {
@@ -220,6 +205,25 @@ class _DragFlipperState extends State<DragFlipper>
     );
   }
 
+
+  ///The [findSide] method is a helper function used to determine which side of the [DragFlipper] is
+  ///logically to be displayed. It uses the current [dragHorizontal] and [dragVertical] values, as well as
+  /// the [dragAxis] property to determine whether the [front] or [back] side of the [DragFlipper] is to be displayed.
+  ///
+  /// The method updates the following properties:
+  ///
+  /// [isFront] : A boolean property indicating whether the front side of the DragFlipper is
+  /// currently being displayed.
+  /// [isInverted] : A boolean property indicating whether the flipper is currently being displayed in
+  /// an inverted or a normal view.
+  ///
+  /// The [findSide] method is called inside the [animationController.addListener] method in the
+  /// [initState] function and [onPanUpdate] function, thus it will be called every time the flipper
+  /// is dragged manually or by [animationController].
+  ///
+  ///
+  /// This function is important for the correct functioning of the DragFlipper widget and should not be
+  /// modified or removed unless absolutely necessary.
   void findSide() {
     if (widget.dragAxis == DragAxis.horizontal) {
       if (dragHorizontal <= 90 || dragHorizontal >= 270) {
@@ -258,12 +262,16 @@ class _DragFlipperState extends State<DragFlipper>
     }
   }
 
+
+  ///For finding width for shadow.
+  //TODO
   getWidth() {
     return dragHorizontal > 180
         ? (130 + (180 - dragHorizontal) * 1.44)
         : 130 - (dragHorizontal * 1.44);
   }
 
+  ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.vertical].
   void verticalDragUpdate(DragUpdateDetails details) {
     setState(() {
       dragVertical += details.delta.dy;
@@ -272,6 +280,7 @@ class _DragFlipperState extends State<DragFlipper>
     });
   }
 
+  ///Function for [onPanEnd] when the [dragAxis] is [DragAxis.vertical].
   void verticalDragEnd(DragEndDetails details) {
     final velocity = details.velocity.pixelsPerSecond.dy.abs();
     if (velocity >= 100) {
@@ -284,6 +293,7 @@ class _DragFlipperState extends State<DragFlipper>
     animationController.forward(from: 0);
   }
 
+  ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.horizontal].
   void horizontalDragUpdate(DragUpdateDetails details) {
     setState(() {
       dragHorizontal -= details.delta.dx;
@@ -292,6 +302,7 @@ class _DragFlipperState extends State<DragFlipper>
     });
   }
 
+  ///Function for [onPanEnd] when the [dragAxis] is [DragAxis.horizontal].
   void horizontalDragEnd(DragEndDetails details) {
     final velocity = details.velocity.pixelsPerSecond.dx.abs();
     if (velocity >= 100) {
@@ -304,6 +315,7 @@ class _DragFlipperState extends State<DragFlipper>
     animationController.forward(from: 0);
   }
 
+  ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.both].
   void bothDragUpdate(DragUpdateDetails details) {
     if(isInverted){
       dragHorizontal += details.delta.dx;
@@ -319,6 +331,7 @@ class _DragFlipperState extends State<DragFlipper>
     });
   }
 
+  ///Function for [onPanEnd] when the [dragAxis] is [DragAxis.both].
   void bothDragEnd(DragEndDetails details) {
     final yVelocity = details.velocity.pixelsPerSecond.dy.abs();
     final xVelocity = details.velocity.pixelsPerSecond.dx.abs();
