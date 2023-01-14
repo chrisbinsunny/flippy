@@ -26,7 +26,7 @@ class _DragFlipperState extends State<DragFlipper>
   late AnimationController animationController;
   late Animation<double> animationVertical, animationHorizontal;
   double dragHorizontal = 0, dragVertical = 0;
-  bool isFront = true, isFrontStart = true;
+  bool isFront = true, isFrontStart = true, isInverted=false;
   void Function(DragUpdateDetails)? onPanUpdate;
   void Function(DragEndDetails)? onPanEnd;
 
@@ -166,18 +166,36 @@ class _DragFlipperState extends State<DragFlipper>
     }
     else{
 
-      dev.log(isFront?"Front":"Back");
+      //dev.log(isFront?"Front":"Back");
 
-      if (dragVertical <= 90 || dragVertical >= 270) {
-        isFront = true;
-      } else {
-        isFront = false;
+      if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront=true;
+        isInverted=false;
+
       }
-      if (dragHorizontal <= 90 || dragHorizontal >= 270) {
-        isFront = true;
-      } else {
-        isFront = false;
+      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront=true;
+        isInverted=true;
       }
+      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront=false;
+        isInverted=true;
+      }
+      else if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront=false;
+        isInverted=false;
+      }
+
+      // if (dragVertical <= 90 || dragVertical >= 270) {
+      //   isFront = true;
+      // } else {
+      //   isFront = false;
+      // }
+      // if (dragHorizontal <= 90 || dragHorizontal >= 270) {
+      //   isFront = true;
+      // } else {
+      //   isFront = false;
+      // }
 
     }
   }
@@ -243,8 +261,14 @@ class _DragFlipperState extends State<DragFlipper>
     final yVelocity = details.velocity.pixelsPerSecond.dy.abs();
     final xVelocity = details.velocity.pixelsPerSecond.dx.abs();
     if ((yVelocity >= 100) || (xVelocity >= 100)) {
+      dev.log(isFrontStart.toString());
       isFront = !isFrontStart;
     }
+
+    dev.log(
+      "\nanimationVertical: \nbegin= $dragVertical, end= ${isFront ? (dragVertical > 180 ? 360 : 0) : 180}\n"
+          "animationHorizontal: \nbegin= $dragHorizontal, end= ${isFront ? (dragHorizontal > 180 ? 360 : 0) : 180}"
+    );
 
     animationVertical = Tween<double>(
       begin: dragVertical,
@@ -254,7 +278,7 @@ class _DragFlipperState extends State<DragFlipper>
 
     animationHorizontal = Tween<double>(
       begin: dragHorizontal,
-      end: isFront ? (dragHorizontal > 180 ? 360 : 0) : 180,
+      end: isFront ? (dragHorizontal > 180 ? isInverted?180:360 : isInverted?180:0) : isInverted?0:180,
     ).animate(animationController);
 
     animationController.forward(from: 0);
