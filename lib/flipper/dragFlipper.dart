@@ -109,6 +109,7 @@ class DragFlipperState extends State<DragFlipper>
     animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
+
     );
     switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
@@ -183,7 +184,6 @@ class DragFlipperState extends State<DragFlipper>
         break;
     }
 
-    dev.log("$dragVertical");
 
     return GestureDetector(
       onPanStart: (detail) {
