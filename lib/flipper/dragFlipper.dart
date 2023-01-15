@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:developer' as dev;
-import 'package:flipper/constants/parameters.dart';
+import 'package:flipper/flipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +11,19 @@ class DragFlipper extends StatefulWidget {
       {super.key,
       required this.front,
       required this.back,
+        this.controller,
         this.height=384,
         this.width=240,
       this.dragAxis = DragAxis.horizontal,
         this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         this.backgroundColor= const Color(0xff0c0c0c),
         this.borderRadius= const BorderRadius.all(Radius.circular(8.0)),
-      });
+      }
+
+
+      );
+
+  final FlipperController? controller;
 
 
   /// The [Widget] to be shown on the front of the Flipper. This is the first screen shown in Flipper.
@@ -51,10 +57,10 @@ class DragFlipper extends StatefulWidget {
   final Color backgroundColor;
   final BorderRadiusGeometry borderRadius;
   @override
-  State<DragFlipper> createState() => _DragFlipperState();
+  State<DragFlipper> createState() => DragFlipperState();
 }
 
-class _DragFlipperState extends State<DragFlipper>
+class DragFlipperState extends State<DragFlipper>
     with SingleTickerProviderStateMixin {
 
   ///[AnimationController] to control the animation of the flipper after it is dragged. Used to restore
@@ -88,6 +94,8 @@ class _DragFlipperState extends State<DragFlipper>
 
   ///[transform] is used to store the kind of transform needed for the Flipper. Value to be added inside build.
   late Matrix4 transform;
+
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -131,6 +139,14 @@ class _DragFlipperState extends State<DragFlipper>
 
     super.initState();
   }
+
+  @override
+  void didUpdateWidget(DragFlipper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.controller?.state ??= this;
+  }
+
+
 
   @override
   void dispose() {
@@ -308,6 +324,7 @@ class _DragFlipperState extends State<DragFlipper>
     if (velocity >= 100) {
       isFront = !isFrontStart;
     }
+
     animationHorizontal = Tween<double>(
       begin: dragHorizontal,
       end: isFront ? (dragHorizontal > 180 ? 360 : 0) : 180,
