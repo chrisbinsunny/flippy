@@ -172,6 +172,30 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },),
               ),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+            IconButton(
+                onPressed: (){},
+                icon: Icon(
+                  Icons.flip,
+                  color: Colors.red,
+                  size: 30,
+                )
+            ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(
+                      Icons.rotate_90_degrees_ccw,
+                      color: Colors.red,
+                      size: 30,
+                    )
+                )
+              ],
+            ),
+            SizedBox(
+              height: 50,
             )
           ],
         ),
