@@ -32,7 +32,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  FlipperController controller= FlipperController();
+  FlipperController controller= FlipperController(
+    dragAxis: DragAxis.vertical,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: DragFlipper(
-                dragAxis: DragAxis.vertical,
                 controller: controller,
 
                 front: LayoutBuilder(
