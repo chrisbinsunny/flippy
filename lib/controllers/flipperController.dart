@@ -26,7 +26,7 @@ class FlipperController extends ChangeNotifier {
 
   final int repeat;
 
-///Flip the Flipper to the Left for [repeat] times.
+///Flips the Flipper to the Left for [repeat] times.
   ///Only works with
   /// ```dart
   /// DragAxis.horizontal
@@ -51,6 +51,15 @@ class FlipperController extends ChangeNotifier {
 
   }
 
+  ///Flips the Flipper to the Right for [repeat] times.
+  ///Only works with
+  /// ```dart
+  /// DragAxis.horizontal
+  /// ```
+  /// and
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
   void flipRight(){
 
     assert(_state != null,
@@ -67,6 +76,15 @@ class FlipperController extends ChangeNotifier {
 
   }
 
+  ///Flips the Flipper to the Bottom for [repeat] times.
+  ///Only works with
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
+  /// and
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
   void flipDown(){
 
     assert(_state != null,
@@ -83,6 +101,15 @@ class FlipperController extends ChangeNotifier {
 
   }
 
+  ///Flips the Flipper to the Top for [repeat] times.
+  ///Only works with
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
+  /// and
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
   void flipUp(){
 
     assert(_state != null,
