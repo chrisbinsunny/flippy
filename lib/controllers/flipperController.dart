@@ -9,11 +9,11 @@ class FlipperController extends ChangeNotifier {
 
   FlipperController({
     this.dragAxis = DragAxis.horizontal,
-    this.repeat=1
   });
 
 
   DragFlipperState? _state;
+
   /// The internal widget state.
   /// Use only if you know what you're doing!
   set state(DragFlipperState? value) {
@@ -24,9 +24,9 @@ class FlipperController extends ChangeNotifier {
   /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
 
-  final int repeat;
 
-///Flips the Flipper to the Left for [repeat] times.
+
+///Flips the Flipper to the Left for one time.
   ///Only works with
   /// ```dart
   /// DragAxis.horizontal
@@ -51,7 +51,7 @@ class FlipperController extends ChangeNotifier {
 
   }
 
-  ///Flips the Flipper to the Right for [repeat] times.
+  ///Flips the Flipper to the Right for one time.
   ///Only works with
   /// ```dart
   /// DragAxis.horizontal
@@ -76,7 +76,7 @@ class FlipperController extends ChangeNotifier {
 
   }
 
-  ///Flips the Flipper to the Bottom for [repeat] times.
+  ///Flips the Flipper to the Bottom for one time.
   ///Only works with
   /// ```dart
   /// DragAxis.vertical
@@ -101,7 +101,7 @@ class FlipperController extends ChangeNotifier {
 
   }
 
-  ///Flips the Flipper to the Top for [repeat] times.
+  ///Flips the Flipper to the Top for one time.
   ///Only works with
   /// ```dart
   /// DragAxis.vertical
