@@ -143,7 +143,7 @@ class DragFlipperState extends State<DragFlipper>
   @override
   void didUpdateWidget(DragFlipper oldWidget) {
     super.didUpdateWidget(oldWidget);
-    widget.controller?.state ??= this;
+    oldWidget.controller?.state??= this;
   }
 
 
@@ -175,6 +175,8 @@ class DragFlipperState extends State<DragFlipper>
           ..rotateY(dragHorizontal / 180 * pi);
         break;
     }
+
+    dev.log("$dragVertical");
 
     return GestureDetector(
       onPanStart: (detail) {
