@@ -1,4 +1,5 @@
 import 'package:flipper/constants/parameters.dart';
+import 'package:flipper/controllers/flipperController.dart';
 import 'package:flipper/flipper.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  FlipperController controller= FlipperController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: DragFlipper(
-                dragAxis: DragAxis.both,
+                dragAxis: DragAxis.horizontal,
+                controller: controller,
 
                 front: LayoutBuilder(
                     builder: (p0, constraints) {
@@ -177,7 +182,9 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
             IconButton(
-                onPressed: (){},
+                onPressed: (){
+                  controller.flipRight();
+                },
                 icon: Icon(
                   Icons.flip,
                   color: Colors.red,
@@ -185,7 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
             ),
                 IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      controller.flipLeft();
+
+                    },
                     icon: Icon(
                       Icons.rotate_90_degrees_ccw,
                       color: Colors.red,
