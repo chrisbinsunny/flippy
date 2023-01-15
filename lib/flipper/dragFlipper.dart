@@ -25,19 +25,26 @@ class DragFlipper extends StatefulWidget {
   final FlipperController controller;
 
 
-  /// The [Widget] to be shown on the front of the Flipper. This is the first screen shown in Flipper.
-  /// [front] can be an [Image.asset], [Container] or any other widgets.
+  /// The [Widget] to be shown on the front of the Flipper.
+  ///
+  /// This is the first screen shown in Flipper. [front] can be an [Image.asset], [Container] or any other widgets.
   final Widget front;
 
-  /// The [Widget] to be shown on the back of the Flipper. This is the back screen shown in Flipper.
+  /// The [Widget] to be shown on the back of the Flipper.
+  ///
+  /// This is the back screen shown in Flipper.
   /// [back] can be an [Image.asset], [Container] or any other widgets.
   final Widget back;
 
-  /// The [height] of the Flipper. The shadow is outside of the given height.
+  /// The [height] of the Flipper.
+  ///
+  /// The shadow is outside of the given height.
   /// The height is only for the interactive area of the Flipper. Defaults to 384.
   final double height;
 
-  /// The [width] of the Flipper. The width is only for the interactive area of the Flipper.
+  /// The [width] of the Flipper.
+  ///
+  /// The width is only for the interactive area of the Flipper.
   /// Defaults to 240.
   final double width;
 
@@ -60,11 +67,14 @@ class DragFlipper extends StatefulWidget {
 class DragFlipperState extends State<DragFlipper>
     with SingleTickerProviderStateMixin {
 
-  ///[AnimationController] to control the animation of the flipper after it is dragged. Used to restore
-  ///the flipper to default state or straight state.
+  ///[AnimationController] to control the animation of the flipper after it is dragged.
+  ///
+  /// Used to restore the flipper to default state or straight state.
   late AnimationController animationController;
 
-
+  ///Controls and returns double value of animation.
+  ///
+  ///
   ///[Animation] objects that control the animation of the flipper along the
   /// vertical and horizontal axis respectively. Controls where the flipper should be turning to after drag.
   late Animation<double> animationVertical, animationHorizontal;
