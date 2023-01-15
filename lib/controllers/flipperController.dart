@@ -9,6 +9,7 @@ class FlipperController extends ChangeNotifier {
 
   FlipperController({
     this.dragAxis = DragAxis.horizontal,
+    this.repeat=1
   });
 
 
@@ -23,8 +24,18 @@ class FlipperController extends ChangeNotifier {
   /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
 
+  final int repeat;
 
-  void flipLeft(){
+///Flip the Flipper to the Left for [repeat] times.
+  ///Only works with
+  /// ```dart
+  /// DragAxis.horizontal
+  /// ```
+  /// and
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
+  void flipLeft() {
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
