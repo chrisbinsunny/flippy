@@ -181,23 +181,50 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-            IconButton(
-                onPressed: (){
-                  controller.flipRight();
-                },
-                icon: Icon(
-                  Icons.flip,
-                  color: Colors.red,
-                  size: 30,
-                )
-            ),
+
                 IconButton(
                     onPressed: (){
                       controller.flipLeft();
 
                     },
                     icon: Icon(
-                      Icons.rotate_90_degrees_ccw,
+                      Icons.arrow_circle_left_outlined,
+                      color: Colors.red,
+                      size: 30,
+                    )
+                ),
+                IconButton(
+                    onPressed: (){
+                      controller.flipRight();
+                    },
+                    icon: Icon(
+                      Icons.arrow_circle_right_outlined,
+                      color: Colors.red,
+                      size: 30,
+                    )
+                ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: (){
+                      controller.flipDown();
+                    },
+                    icon: Icon(
+                      Icons.arrow_circle_down_outlined,
+                      color: Colors.red,
+                      size: 30,
+                    )
+                ),
+                IconButton(
+                    onPressed: (){
+                      controller.flipUp();
+
+                    },
+                    icon: Icon(
+                      Icons.arrow_circle_up_outlined,
                       color: Colors.red,
                       size: 30,
                     )
@@ -205,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 20,
             )
           ],
         ),
