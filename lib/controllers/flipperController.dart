@@ -6,80 +6,86 @@ import 'dart:developer' as dev;
 
 
 class FlipperController extends ChangeNotifier {
+
+  FlipperController({
+    this.dragAxis = DragAxis.horizontal,
+  });
+
+
+  DragFlipperState? _state;
   /// The internal widget state.
   /// Use only if you know what you're doing!
-  DragFlipperState? state;
-
-  /// The underlying AnimationController.
-  /// Use only if you know what you're doing!
-  AnimationController? get controller {
-    assert(state != null,
-    'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
-    return state!.animationController;
+  set state(DragFlipperState? value) {
+    _state = value;
   }
+
+  /// The [DragAxis] on which the Flipper should be dragged. This is not the axis of rotation.
+  /// This is the axis of drag. Defaults to [DragAxis.horizontal].
+  final DragAxis dragAxis;
 
 
   void flipLeft(){
 
-    assert(state != null,
+    assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
-    assert((state!.widget.dragAxis!=DragAxis.vertical),
+    assert((dragAxis!=DragAxis.vertical),
     'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
-    state!.animationHorizontal= Tween<double>(
-      begin: state!.isFront?0:180,
-      end: state!.isFront?180:360,
-    ).animate(state!.animationController);
-    state!.animationController.forward(from: 0);
+    _state!.animationHorizontal= Tween<double>(
+      begin: _state!.isFront?0:180,
+      end: _state!.isFront?180:360,
+    ).animate(_state!.animationController);
+    _state!.animationController.forward(from: 0);
 
   }
 
   void flipRight(){
 
-    assert(state != null,
+    assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
-    assert((state!.widget.dragAxis!=DragAxis.vertical),
+    assert((dragAxis!=DragAxis.vertical),
     'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
-    state!.animationHorizontal= Tween<double>(
-      begin: state!.isFront?360:180,
-      end: state!.isFront?180:0,
-    ).animate(state!.animationController);
-    state!.animationController.forward(from: 0);
+    _state!.animationHorizontal= Tween<double>(
+      begin: _state!.isFront?360:180,
+      end: _state!.isFront?180:0,
+    ).animate(_state!.animationController);
+    _state!.animationController.forward(from: 0);
 
   }
 
   void flipDown(){
 
-    assert(state != null,
+    assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
-    assert((state!.widget.dragAxis!=DragAxis.horizontal),
+    assert((dragAxis!=DragAxis.horizontal),
     'Could not call flipDown() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
-    state!.animationVertical= Tween<double>(
-      begin: state!.isFront?0:180,
-      end: state!.isFront?180:360,
-    ).animate(state!.animationController);
-    state!.animationController.forward(from: 0);
+    _state!.animationVertical= Tween<double>(
+      begin: _state!.isFront?0:180,
+      end: _state!.isFront?180:360,
+    ).animate(_state!.animationController);
+    _state!.animationController.forward(from: 0);
 
   }
 
   void flipUp(){
 
-    assert(state != null,
+    assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
-    assert((state!.widget.dragAxis!=DragAxis.horizontal),
+    assert((dragAxis!=DragAxis.horizontal),
     'Could not call flipUp() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
-    state!.animationVertical= Tween<double>(
-      begin: state!.isFront?360:180,
-      end: state!.isFront?180:0,
-    ).animate(state!.animationController);
-    state!.animationController.forward(from: 0);
+    _state!.animationVertical= Tween<double>(
+      begin: _state!.isFront?360:180,
+      end: _state!.isFront?180:0,
+    ).animate(_state!.animationController);
+    _state!.animationController.forward(from: 0);
 
   }
+
 }
