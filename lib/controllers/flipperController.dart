@@ -37,8 +37,8 @@ class FlipperController extends ChangeNotifier {
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
 
     state!.animationHorizontal= Tween<double>(
-      begin: state!.isFront?180:360,
-      end: state!.isFront?0:180,
+      begin: state!.isFront?360:180,
+      end: state!.isFront?180:0,
     ).animate(state!.animationController);
     state!.animationController.forward(from: 0);
 
