@@ -11,10 +11,9 @@ class DragFlipper extends StatefulWidget {
       {super.key,
       required this.front,
       required this.back,
-        this.controller,
+        required this.controller,
         this.height=384,
         this.width=240,
-      this.dragAxis = DragAxis.horizontal,
         this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         this.backgroundColor= const Color(0xff0c0c0c),
         this.borderRadius= const BorderRadius.all(Radius.circular(8.0)),
@@ -23,7 +22,7 @@ class DragFlipper extends StatefulWidget {
 
       );
 
-  final FlipperController? controller;
+  final FlipperController controller;
 
 
   /// The [Widget] to be shown on the front of the Flipper. This is the first screen shown in Flipper.
@@ -42,9 +41,7 @@ class DragFlipper extends StatefulWidget {
   /// Defaults to 240.
   final double width;
 
-  /// The [DragAxis] on which the Flipper should be dragged. This is not the axis of rotation.
-  /// This is the axis of drag. Defaults to [DragAxis.horizontal].
-  final DragAxis dragAxis;
+
 
   /// The [padding] to be applied inside the Flipper.
   ///
@@ -66,6 +63,7 @@ class DragFlipperState extends State<DragFlipper>
   ///[AnimationController] to control the animation of the flipper after it is dragged. Used to restore
   ///the flipper to default state or straight state.
   late AnimationController animationController;
+
 
   ///[Animation] objects that control the animation of the flipper along the
   /// vertical and horizontal axis respectively. Controls where the flipper should be turning to after drag.
@@ -102,8 +100,7 @@ class DragFlipperState extends State<DragFlipper>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-
-    switch (widget.dragAxis) {
+    switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
         onPanUpdate = horizontalDragUpdate;
         onPanEnd = horizontalDragEnd;
@@ -143,9 +140,8 @@ class DragFlipperState extends State<DragFlipper>
   @override
   void didUpdateWidget(DragFlipper oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.controller?.state??= this;
+    oldWidget.controller.state= this;
   }
-
 
 
   @override
@@ -157,7 +153,8 @@ class DragFlipperState extends State<DragFlipper>
   @override
   Widget build(BuildContext context) {
 
-    switch(widget.dragAxis){
+
+    switch(widget.controller.dragAxis){
       case DragAxis.horizontal:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
@@ -243,14 +240,14 @@ class DragFlipperState extends State<DragFlipper>
   /// This function is important for the correct functioning of the DragFlipper widget and should not be
   /// modified or removed unless absolutely necessary.
   void findSide() {
-    if (widget.dragAxis == DragAxis.horizontal) {
+    if (widget.controller.dragAxis == DragAxis.horizontal) {
       if (dragHorizontal <= 90 || dragHorizontal >= 270) {
         isFront = true;
       } else {
         isFront = false;
       }
     } else
-    if(widget.dragAxis==DragAxis.vertical)
+    if(widget.controller.dragAxis==DragAxis.vertical)
     {
       if (dragVertical <= 90 || dragVertical >= 270) {
         isFront = true;
