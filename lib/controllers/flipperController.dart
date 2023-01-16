@@ -24,7 +24,7 @@ class FlipperController extends ChangeNotifier {
   /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
 
-
+//TODO left and right is working. Other two not working
 
 ///Flips the Flipper to the Left for one time.
   ///Only works with
@@ -43,12 +43,21 @@ class FlipperController extends ChangeNotifier {
     'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
+    ///For DragAxis.both
+    ///Initialising the unused animation with the current value.
+    _state!.animationVertical= AlwaysStoppedAnimation<double>(_state!.dragVertical);
+
+
+
     _state!.animationHorizontal= Tween<double>(
       begin: _state!.isFront?0:180,
       end: _state!.isFront?180:360,
     ).animate(_state!.animationController);
-    _state!.animationController.forward(from: 0);
-
+    if(_state!.isInverted) {
+      _state!.animationController.reverse(from: 1);
+    }else{
+      _state!.animationController.forward(from: 0);
+    }
   }
 
   ///Flips the Flipper to the Right for one time.
@@ -68,11 +77,19 @@ class FlipperController extends ChangeNotifier {
     'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
+    ///For DragAxis.both
+    ///Initialising the unused animation with the current value.
+    _state!.animationVertical= AlwaysStoppedAnimation<double>(_state!.dragVertical);
     _state!.animationHorizontal= Tween<double>(
       begin: _state!.isFront?360:180,
       end: _state!.isFront?180:0,
     ).animate(_state!.animationController);
-    _state!.animationController.forward(from: 0);
+
+    if(_state!.isInverted) {
+      _state!.animationController.reverse(from: 1);
+    }else{
+      _state!.animationController.forward(from: 0);
+    }
 
   }
 
@@ -93,10 +110,15 @@ class FlipperController extends ChangeNotifier {
     'Could not call flipDown() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
+
+    ///For DragAxis.both
+    ///Initialising the unused animation with the current value.
+    _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
     _state!.animationVertical= Tween<double>(
       begin: _state!.isFront?0:180,
       end: _state!.isFront?180:360,
     ).animate(_state!.animationController);
+
     _state!.animationController.forward(from: 0);
 
   }
@@ -118,10 +140,19 @@ class FlipperController extends ChangeNotifier {
     'Could not call flipUp() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
+
+    ///For DragAxis.both
+    ///Initialising the unused animation with the current value.
+    _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
+
+
+
+
     _state!.animationVertical= Tween<double>(
       begin: _state!.isFront?360:180,
       end: _state!.isFront?180:0,
     ).animate(_state!.animationController);
+
     _state!.animationController.forward(from: 0);
 
   }
