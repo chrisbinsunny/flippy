@@ -115,8 +115,8 @@ class FlipperController extends ChangeNotifier {
     ///Initialising the unused animation with the current value.
     _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
     _state!.animationVertical= Tween<double>(
-      begin: _state!.isFront?0:180,
-      end: _state!.isFront?180:360,
+      begin: _state!.isInverted?0:180,
+      end: _state!.isInverted?180:360,
     ).animate(_state!.animationController);
 
     _state!.animationController.forward(from: 0);
@@ -149,8 +149,8 @@ class FlipperController extends ChangeNotifier {
 
 
     _state!.animationVertical= Tween<double>(
-      begin: _state!.isFront?360:180,
-      end: _state!.isFront?180:0,
+      begin: _state!.isInverted?180:360,
+      end:   _state!.isInverted?0:180,
     ).animate(_state!.animationController);
 
     _state!.animationController.forward(from: 0);
