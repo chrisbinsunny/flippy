@@ -165,7 +165,7 @@ class DragFlipperState extends State<DragFlipper>
   @override
   Widget build(BuildContext context) {
 
-dev.log("$dragHorizontal, $dragVertical, $isFront, $isInverted");
+dev.log("$dragHorizontal, $dragVertical");
     switch(widget.controller.dragAxis){
       case DragAxis.horizontal:
         transform = Matrix4.identity()
