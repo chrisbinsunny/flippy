@@ -26,7 +26,15 @@ class FlipperController extends ChangeNotifier {
 
 //TODO left and right is working. Other two not working
 
-
+  ///Flips the Flipper to the Left for one time.
+  ///Only works with
+  /// ```dart
+  /// DragAxis.horizontal
+  /// ```
+  /// and
+  /// ```dart
+  /// DragAxis.vertical
+  /// ```
   void flipLeft() {
 
     assert(_state != null,
