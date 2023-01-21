@@ -27,14 +27,6 @@ class FlipperController extends ChangeNotifier {
 //TODO left and right is working. Other two not working
 
   ///Flips the Flipper to the Left for one time.
-  ///Only works with
-  /// ```dart
-  /// DragAxis.horizontal
-  /// ```
-  /// and
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
   void flipLeft() {
 
     assert(_state != null,
@@ -45,8 +37,10 @@ class FlipperController extends ChangeNotifier {
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
-    _state!.animationVertical= AlwaysStoppedAnimation<double>(_state!.dragVertical);
-
+    if(dragAxis==DragAxis.both) {
+      _state!.animationVertical =
+          AlwaysStoppedAnimation<double>(_state!.dragVertical);
+    }
 
 
     _state!.animationHorizontal= Tween<double>(
@@ -58,17 +52,10 @@ class FlipperController extends ChangeNotifier {
     }else{
       _state!.animationController.forward(from: 0);
     }
+
   }
 
   ///Flips the Flipper to the Right for one time.
-  ///Only works with
-  /// ```dart
-  /// DragAxis.horizontal
-  /// ```
-  /// and
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
   void flipRight(){
 
     assert(_state != null,
@@ -79,7 +66,10 @@ class FlipperController extends ChangeNotifier {
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
+    if(dragAxis==DragAxis.both) {
     _state!.animationVertical= AlwaysStoppedAnimation<double>(_state!.dragVertical);
+    }
+
     _state!.animationHorizontal= Tween<double>(
       begin: _state!.isFront?360:180,
       end: _state!.isFront?180:0,
@@ -94,14 +84,6 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Bottom for one time.
-  ///Only works with
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
-  /// and
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
   void flipDown(){
 
     assert(_state != null,
@@ -113,7 +95,10 @@ class FlipperController extends ChangeNotifier {
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
-    _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
+    if(dragAxis==DragAxis.both) {
+      _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
+    }
+
     _state!.animationVertical= Tween<double>(
       begin: _state!.isInverted?180:0,
       end: _state!.isInverted?360:180,
@@ -124,14 +109,6 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Top for one time.
-  ///Only works with
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
-  /// and
-  /// ```dart
-  /// DragAxis.vertical
-  /// ```
   void flipUp(){
 
     assert(_state != null,
@@ -143,7 +120,10 @@ class FlipperController extends ChangeNotifier {
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
+
+    if(dragAxis==DragAxis.both) {
     _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
+    }
 
 
     
