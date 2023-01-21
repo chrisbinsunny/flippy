@@ -25,13 +25,16 @@ class FlipperController extends ChangeNotifier {
   final DragAxis dragAxis;
 
 
+
+
   ///Flips the Flipper to the Left for one time.
-  void _flipLeft() {
+  ///Only works with [DragAxis.horizontal] and [DragAxis.both].
+  void flipLeft() {
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
     assert((dragAxis!=DragAxis.vertical),
-    'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
+    'Cannot call flipLeft() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
     ///For DragAxis.both
@@ -55,12 +58,13 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Right for one time.
-  void _flipRight(){
+  ///Only works with [DragAxis.horizontal] and [DragAxis.both].
+  void flipRight(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
     assert((dragAxis!=DragAxis.vertical),
-    'Could not call flipUp() when the dragAxis is set to DragAxis.vertical!'
+    'Cannot call flipRight() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
 
     ///For DragAxis.both
@@ -83,12 +87,13 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Bottom for one time.
-  void _flipDown(){
+  ///Only works with [DragAxis.vertical] and [DragAxis.both].
+  void flipDown(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
     assert((dragAxis!=DragAxis.horizontal),
-    'Could not call flipDown() when the dragAxis is set to DragAxis.horizontal!'
+    'Cannot call flipDown() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
 
@@ -108,12 +113,13 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Top for one time.
-  void _flipUp(){
+  ///Only works with [DragAxis.vertical] and [DragAxis.both].
+  void flipUp(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
     assert((dragAxis!=DragAxis.horizontal),
-    'Could not call flipUp() when the dragAxis is set to DragAxis.horizontal!'
+    'Cannot call flipUp() when the dragAxis is set to DragAxis.horizontal!'
         '\nUse DragAxis.vertical or DragAxis.both');
 
 
