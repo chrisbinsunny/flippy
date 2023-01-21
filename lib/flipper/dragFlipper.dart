@@ -18,12 +18,17 @@ class DragFlipper extends StatefulWidget {
         this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         this.margin,
         this.backgroundColor= const Color(0xff0c0c0c),
-        this.borderRadius= const BorderRadius.all(Radius.circular(8.0)),
-      }):assert(border == null || borderRadius == null,
-  'Cannot provide both a color and a decoration\n'
-  'To provide both, use "decoration: BoxDecoration(color: color)".',
-  );
+        this.borderRadius,
+        this.gradient,
+        this.shape=BoxShape.rectangle
+      }):
+        assert(shape != BoxShape.circle || borderRadius == null);
 
+
+  /// The [controller] that controls the animation of the flipper manually. Use the [controller] to
+  /// add programmatic buttons. Pass the direction of Drag to the controller.
+  /// It is a required parameter.
+  ///
   final FlipperController controller;
 
 
@@ -36,7 +41,7 @@ class DragFlipper extends StatefulWidget {
   ///
   /// This is the back screen shown in Flipper.
   /// [back] can be an [Image.asset], [Container] or any other widgets.
-  final Widget back;
+  final Widget? back;
 
   /// The [height] of the Flipper.
   ///
@@ -68,11 +73,37 @@ class DragFlipper extends StatefulWidget {
   ///
   /// A uniform Border is required for a borderRadius.
   /// Make sure to give uniform border if borderRadius>0
-
+  ///
   final Border? border;
 
+  /// The color to fill in the background of the flipper.
+  ///
+  /// The color is filled into the [shape] of the box (e.g., either a rectangle,
+  /// potentially with a [borderRadius], or a circle).
+  ///
+  /// This is ignored if [gradient] is non-null.
+  ///
   final Color backgroundColor;
-  final BorderRadiusGeometry borderRadius;
+
+  /// If non-null, the corners of this box are rounded by this [BorderRadius].
+  ///
+  /// Applies only to boxes with rectangular shapes; error if [shape] is not
+  /// [BoxShape.rectangle].
+  ///
+  final BorderRadiusGeometry? borderRadius;
+
+  /// A gradient to use when filling the box.
+  ///
+  /// If this is specified, [backgroundColor] has no effect.
+  ///
+  final Gradient? gradient;
+
+  /// The shape to fill the background [color], [gradient], and [image] into.
+  ///
+  /// If this is [BoxShape.circle] then [borderRadius] is ignored.
+  /// Defaults to [BoxShape.rectangle].
+  final BoxShape shape;
+
   @override
   State<DragFlipper> createState() => DragFlipperState();
 }
@@ -214,7 +245,7 @@ dev.log("$dragHorizontal, $dragVertical");
             transform: transform,
             alignment: Alignment.center,
             child: ClipRRect(
-              borderRadius: widget.borderRadius,
+              borderRadius: widget.borderRadius??BorderRadius.zero,
               child: Container(
                 height: widget.height,
                 width: widget.width,
@@ -224,7 +255,9 @@ dev.log("$dragHorizontal, $dragVertical");
                 decoration: BoxDecoration(
                     color: widget.backgroundColor,
                     borderRadius: widget.borderRadius,
-                  border: widget.border
+                  border: widget.border,
+                  gradient: widget.gradient,
+                  shape: widget.shape,
                 ),
                 child: isFront
                     ? widget.front
