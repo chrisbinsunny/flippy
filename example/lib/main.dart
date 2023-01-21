@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: DragFlipper(
                 controller: controller,
-
+                //borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 front: LayoutBuilder(
                     builder: (p0, constraints) {
                       return Column(
@@ -57,11 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           SizedBox(
                               height: constraints.maxHeight*0.1
-                          ),
-                          const Center(
-                            child: SizedBox(
-                              height: 110,
-                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -112,9 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 155,
+                          height: 30,
                         ),
-
                         SizedBox(
                           width: constraints.maxWidth*0.65,
                           child: const FittedBox(
@@ -136,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Text("  App Developer | Speaker",
                               style: TextStyle(
                                   fontSize: 15,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w200
                               ),
                             ),
