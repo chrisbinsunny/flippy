@@ -12,15 +12,17 @@ class DragFlipper extends StatefulWidget {
       required this.front,
       required this.back,
         required this.controller,
-        this.height=384,
-        this.width=240,
+        this.height=220,
+        this.width=324,
+        this.border,
         this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        this.margin,
         this.backgroundColor= const Color(0xff0c0c0c),
         this.borderRadius= const BorderRadius.all(Radius.circular(8.0)),
-      }
-
-
-      );
+      }):assert(border == null || borderRadius == null,
+  'Cannot provide both a color and a decoration\n'
+  'To provide both, use "decoration: BoxDecoration(color: color)".',
+  );
 
   final FlipperController controller;
 
@@ -57,6 +59,17 @@ class DragFlipper extends StatefulWidget {
   /// const EdgeInsets.symmetric(vertical: 8, horizontal: 12)
   /// ```
   final EdgeInsets padding;
+
+  /// The [margin] to be applied outside the Flipper.
+
+  final EdgeInsets? margin;
+
+  /// The [border] to be added to the Flipper.
+  ///
+  /// A uniform Border is required for a borderRadius.
+  /// Make sure to give uniform border if borderRadius>0
+
+  final Border? border;
 
   final Color backgroundColor;
   final BorderRadiusGeometry borderRadius;
@@ -206,9 +219,12 @@ dev.log("$dragHorizontal, $dragVertical");
                 height: widget.height,
                 width: widget.width,
                 padding: widget.padding,
+                margin: widget.margin,
+
                 decoration: BoxDecoration(
                     color: widget.backgroundColor,
                     borderRadius: widget.borderRadius,
+                  border: widget.border
                 ),
                 child: isFront
                     ? widget.front
