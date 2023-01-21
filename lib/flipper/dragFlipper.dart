@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../components/blurPainter.dart';
+import '../controllers/flipperController.dart';
 
 class DragFlipper extends StatefulWidget {
   const DragFlipper(
