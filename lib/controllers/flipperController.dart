@@ -24,10 +24,9 @@ class FlipperController extends ChangeNotifier {
   /// This is the axis of drag. Defaults to [DragAxis.horizontal].
   final DragAxis dragAxis;
 
-//TODO left and right is working. Other two not working
 
   ///Flips the Flipper to the Left for one time.
-  void flipLeft() {
+  void _flipLeft() {
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
@@ -56,7 +55,7 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Right for one time.
-  void flipRight(){
+  void _flipRight(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
@@ -84,7 +83,7 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Bottom for one time.
-  void flipDown(){
+  void _flipDown(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
@@ -109,7 +108,7 @@ class FlipperController extends ChangeNotifier {
   }
 
   ///Flips the Flipper to the Top for one time.
-  void flipUp(){
+  void _flipUp(){
 
     assert(_state != null,
     'Controller not attached to any Flipper. Seems that you forget to attach controller to Flipper.');
