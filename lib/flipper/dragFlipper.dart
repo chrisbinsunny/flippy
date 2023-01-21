@@ -311,8 +311,10 @@ dev.log("$dragHorizontal, $dragVertical");
     {
       if (dragVertical <= 90 || dragVertical >= 270) {
         isFront = true;
+        isInverted=false;
       } else {
         isFront = false;
+        isInverted=true;
       }
     }
     else{
