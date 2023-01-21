@@ -1,5 +1,3 @@
-import 'package:flipper/constants/parameters.dart';
-import 'package:flipper/controllers/flipperController.dart';
 import 'package:flipper/flipper.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +30,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  FlipperController controller= FlipperController(
-    dragAxis: DragAxis.both,
-  );
+  FlipperController controller= HorizontalFlipperController();
 
   @override
   Widget build(BuildContext context) {
