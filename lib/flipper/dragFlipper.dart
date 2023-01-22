@@ -4,7 +4,7 @@ import 'package:flipper/flipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/blurPainter.dart';
+import '../shadow/blurPainter.dart';
 import '../controllers/flipperController.dart';
 
 class DragFlipper extends StatefulWidget {
@@ -238,45 +238,33 @@ dev.log("$dragHorizontal, $dragVertical");
       },
       onPanUpdate: onPanUpdate,
       onPanEnd: onPanEnd,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Transform(
-            transform: transform,
-            alignment: Alignment.center,
-            child: ClipRRect(
-              borderRadius: widget.borderRadius??BorderRadius.zero,
-              child: Container(
-                height: widget.height,
-                width: widget.width,
-                padding: widget.padding,
-                margin: widget.margin,
+      child: Transform(
+        transform: transform,
+        alignment: Alignment.center,
+        child: ClipRRect(
+          borderRadius: widget.borderRadius??BorderRadius.zero,
+          child: Container(
+            height: widget.height,
+            width: widget.width,
+            padding: widget.padding,
+            margin: widget.margin,
 
-                decoration: BoxDecoration(
-                    color: widget.backgroundColor,
-                    borderRadius: widget.borderRadius,
-                  border: widget.border,
-                  gradient: widget.gradient,
-                  shape: widget.shape,
-                ),
-                child: isFront
-                    ? widget.front
-                    : Transform(
-                        transform: Matrix4.identity()..rotateY(pi),
-                        alignment: Alignment.center,
-                        child: widget.back,
-                      ),
-              ),
+            decoration: BoxDecoration(
+                color: widget.backgroundColor,
+                borderRadius: widget.borderRadius,
+              border: widget.border,
+              gradient: widget.gradient,
+              shape: widget.shape,
             ),
+            child: isFront
+                ? widget.front
+                : Transform(
+                    transform: Matrix4.identity()..rotateY(pi),
+                    alignment: Alignment.center,
+                    child: widget.back,
+                  ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomPaint(
-              foregroundPainter:
-                  CircleBlurPainter(blurSigma: 11, width: getWidth())),
-        ],
+        ),
       ),
     );
   }
@@ -340,14 +328,6 @@ dev.log("$dragHorizontal, $dragVertical");
     }
   }
 
-
-  ///For finding width for shadow.
-  //TODO
-  getWidth() {
-    return dragHorizontal > 180
-        ? (130 + (180 - dragHorizontal) * 1.44)
-        : 130 - (dragHorizontal * 1.44);
-  }
 
   ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.vertical].
   void verticalDragUpdate(DragUpdateDetails details) {
