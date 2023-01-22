@@ -44,134 +44,136 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: DragFlipper(
-                controller: controller,
-                //borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                front: LayoutBuilder(
-                    builder: (p0, constraints) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                              height: constraints.maxHeight*0.1
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 33
-                            ),
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-
-                              child: RichText(
-                                text: const TextSpan(
-                                    text: "Chrisbin\n",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        color: Color(0xff5dc8f8),
-                                        fontSize: 32,
-                                        fontFamily: "Gilroy",
-                                        letterSpacing: 1.5
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: "Sunny",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Color(0xff065a9d),
-                                            fontSize: 35,
-                                            height: 0.9,
-                                            letterSpacing: 0.5
-
-                                        ),
-                                      ),
-                                    ]
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      );}
-                ),
-                back: LayoutBuilder(
-
+            Flipper(
+              controller: controller,
+              //borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+              front: LayoutBuilder(
                   builder: (p0, constraints) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
                         SizedBox(
-                          width: constraints.maxWidth*0.65,
-                          child: const FittedBox(
-                            child: Text(" Chrisbin Sunny",
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600
+                            height: constraints.maxHeight*0.1
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 33
+                          ),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+
+                            child: RichText(
+                              text: const TextSpan(
+                                  text: "Chrisbin\n",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      color: Color(0xff5dc8f8),
+                                      fontSize: 32,
+                                      fontFamily: "Gilroy",
+                                      letterSpacing: 1.5
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: "Sunny",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff065a9d),
+                                          fontSize: 35,
+                                          height: 0.9,
+                                          letterSpacing: 0.5
+
+                                      ),
+                                    ),
+                                  ]
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        SizedBox(
-                          width: constraints.maxWidth*0.6,
-                          child: const FittedBox(
-                            child: Text("  App Developer | Speaker",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w200
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        SizedBox(
-                          width: constraints.maxWidth*0.55,
-                          child: const FittedBox(
-                            child: Text(
-                              " (IND)  +91 83300 70512",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        SizedBox(
-                          width: constraints.maxWidth*0.65,
-                          child: const FittedBox(
-                            child: Text(
-                              " chrisbinofficial@gmail.com",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontFamily: "Gilroy",
-                                  fontWeight: FontWeight.w300
-                              ),
-                            ),
-                          ),
-                        ),
+
                       ],
-                    );
-                  },),
+                    );}
               ),
+              back: LayoutBuilder(
+
+                builder: (p0, constraints) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        width: constraints.maxWidth*0.65,
+                        child: const FittedBox(
+                          child: Text(" Chrisbin Sunny",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      SizedBox(
+                        width: constraints.maxWidth*0.6,
+                        child: const FittedBox(
+                          child: Text("  App Developer | Speaker",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w200
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        width: constraints.maxWidth*0.55,
+                        child: const FittedBox(
+                          child: Text(
+                            " (IND)  +91 83300 70512",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      SizedBox(
+                        width: constraints.maxWidth*0.65,
+                        child: const FittedBox(
+                          child: Text(
+                            " chrisbinofficial@gmail.com",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontFamily: "Gilroy",
+                                fontWeight: FontWeight.w300
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },),
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            FlipperShadow(controller: controller, blurSigma: 10,),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
