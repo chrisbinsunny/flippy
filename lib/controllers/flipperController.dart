@@ -10,13 +10,11 @@ class FlipperController extends ChangeNotifier {
   FlipperController({
     this.dragAxis = DragAxis.horizontal,
   });
-
-
-  DragFlipperState? _state;
+  dynamic _state;
 
   /// The internal widget state.
   /// Use only if you know what you're doing!
-  set state(DragFlipperState? value) {
+  set state(dynamic value) {
     _state = value;
   }
 
@@ -36,6 +34,7 @@ class FlipperController extends ChangeNotifier {
     assert((dragAxis!=DragAxis.vertical),
     'Cannot call flipLeft() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
+    dev.log(_state.runtimeType.toString());
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
@@ -50,9 +49,9 @@ class FlipperController extends ChangeNotifier {
       end: _state!.isFront?180:360,
     ).animate(_state!.animationController);
     if(_state!.isInverted) {
-      _state!.animationController.reverse(from: 1);
+      _state!.animationController.reverse(from: 1.0);
     }else{
-      _state!.animationController.forward(from: 0);
+      _state!.animationController.forward(from: 0.0);
     }
 
   }
@@ -79,9 +78,9 @@ class FlipperController extends ChangeNotifier {
     ).animate(_state!.animationController);
 
     if(_state!.isInverted) {
-      _state!.animationController.reverse(from: 1);
+      _state!.animationController.reverse(from: 1.0);
     }else{
-      _state!.animationController.forward(from: 0);
+      _state!.animationController.forward(from: 0.0);
     }
 
   }
@@ -109,7 +108,7 @@ class FlipperController extends ChangeNotifier {
       end: _state!.isInverted?360:180,
     ).animate(_state!.animationController);
 
-    _state!.animationController.forward(from: 0);
+    _state!.animationController.forward(from: 0.0);
 
   }
 
@@ -138,7 +137,7 @@ class FlipperController extends ChangeNotifier {
       end:   _state!.isInverted?0:180,
     ).animate(_state!.animationController);
 
-    _state!.animationController.forward(from: 0);
+    _state!.animationController.forward(from: 0.0);
 
   }
 
