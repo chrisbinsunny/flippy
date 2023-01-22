@@ -141,4 +141,12 @@ class FlipperController extends ChangeNotifier {
 
   }
 
+
+  ///For finding width for shadow.
+  //TODO
+  getWidth() {
+    return _state!.dragHorizontal > 180
+        ? (130 + (180 - _state!.dragHorizontal) * 1.44)
+        : 130 - (_state!.dragHorizontal * 1.44);
+  }
 }
