@@ -170,10 +170,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },),
             ),
-            const SizedBox(
-              height: 30,
+            FlipperShadow(
+              controller: controller,
+              blurSigma: 10,
             ),
-            FlipperShadow(controller: controller, blurSigma: 10,),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
