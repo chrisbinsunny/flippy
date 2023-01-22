@@ -4,7 +4,7 @@ import 'package:flipper/flipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/blurPainter.dart';
+import '../shadow/blurPainter.dart';
 import '../controllers/flipperController.dart';
 
 class Flipper extends StatefulWidget {
@@ -198,7 +198,6 @@ class FlipperState extends State<Flipper>
   @override
   Widget build(BuildContext context) {
 
-dev.log("$dragHorizontal, $dragVertical");
     switch(widget.controller.dragAxis){
       case DragAxis.horizontal:
         transform = Matrix4.identity()
@@ -254,9 +253,7 @@ dev.log("$dragHorizontal, $dragVertical");
         const SizedBox(
           height: 30,
         ),
-        CustomPaint(
-            foregroundPainter:
-                CircleBlurPainter(blurSigma: 11, width: getWidth())),
+
       ],
     );
   }
