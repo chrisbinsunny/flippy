@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
-class CircleBlurPainter extends CustomPainter {
+class FlipperShadowPainter extends CustomPainter {
 
-  CircleBlurPainter({required this.blurSigma, required this.width});
+  FlipperShadowPainter({
+  required this.blurSigma,
+  required this.width,
+  required this.color,
+    required this.height,
+  });
 
-  double blurSigma, width;
+  final double blurSigma, width, height;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint line = Paint()
-      ..color = const Color(0xff8a8a8a)
+      ..color = color
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, blurSigma);
-    canvas.drawOval(Rect.fromLTRB(-(width), 3, width, 10), line);
+    canvas.drawOval(Rect.fromLTRB(-(width), 3, width, height+3), line);
   }
 
   @override
