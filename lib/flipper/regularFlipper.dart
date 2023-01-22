@@ -178,14 +178,14 @@ class FlipperState extends State<Flipper>
         break;
     }
 
-    widget.controller.state= this as DragFlipperState?;
+    widget.controller.state= this;
     super.initState();
   }
 
   @override
   void didUpdateWidget(Flipper oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.controller.state= this as DragFlipperState?;
+    oldWidget.controller.state= this;
   }
 
 
