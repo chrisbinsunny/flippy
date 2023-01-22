@@ -1,5 +1,7 @@
 library flipper;
 
 export 'flipper/dragFlipper.dart';
+export 'flipper/regularFlipper.dart';
+export 'shadow/shadow.dart';
 export 'constants/parameters.dart';
-export 'controllers/horizontal_flipper_controller.dart';
+export 'controllers/flipperController.dart';
