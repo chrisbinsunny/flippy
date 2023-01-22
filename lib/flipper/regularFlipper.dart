@@ -218,43 +218,32 @@ class FlipperState extends State<Flipper>
     }
 
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Transform(
-          transform: transform,
-          alignment: Alignment.center,
-          child: ClipRRect(
-            borderRadius: widget.borderRadius??BorderRadius.zero,
-            child: Container(
-              height: widget.height,
-              width: widget.width,
-              padding: widget.padding,
-              margin: widget.margin,
-
-              decoration: BoxDecoration(
-                  color: widget.backgroundColor,
-                  borderRadius: widget.borderRadius,
-                border: widget.border,
-                gradient: widget.gradient,
-                shape: widget.shape,
-              ),
-              child: isFront
-                  ? widget.front
-                  : Transform(
-                      transform: Matrix4.identity()..rotateY(pi),
-                      alignment: Alignment.center,
-                      child: widget.back,
-                    ),
-            ),
+    return Transform(
+      transform: transform,
+      alignment: Alignment.center,
+      child: ClipRRect(
+        borderRadius: widget.borderRadius??BorderRadius.zero,
+        child: Container(
+          height: widget.height,
+          width: widget.width,
+          padding: widget.padding,
+          margin: widget.margin,
+          decoration: BoxDecoration(
+              color: widget.backgroundColor,
+              borderRadius: widget.borderRadius,
+            border: widget.border,
+            gradient: widget.gradient,
+            shape: widget.shape,
           ),
+          child: isFront
+              ? widget.front
+              : Transform(
+                  transform: Matrix4.identity()..rotateY(pi),
+                  alignment: Alignment.center,
+                  child: widget.back,
+                ),
         ),
-        const SizedBox(
-          height: 30,
-        ),
-
-      ],
+      ),
     );
   }
 
@@ -317,13 +306,5 @@ class FlipperState extends State<Flipper>
     }
   }
 
-
-  ///For finding width for shadow.
-  //TODO
-  getWidth() {
-    return dragHorizontal > 180
-        ? (130 + (180 - dragHorizontal) * 1.44)
-        : 130 - (dragHorizontal * 1.44);
-  }
 
 }
