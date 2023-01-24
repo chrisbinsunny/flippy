@@ -1,8 +1,6 @@
-import 'package:flipper/constants/parameters.dart';
+import 'package:flippy/constants/parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../flipper/dragFlipper.dart';
-import 'dart:developer' as dev;
 
 
 class FlipperController extends ChangeNotifier {
@@ -34,7 +32,6 @@ class FlipperController extends ChangeNotifier {
     assert((dragAxis!=DragAxis.vertical),
     'Cannot call flipLeft() when the dragAxis is set to DragAxis.vertical!'
         '\nUse DragAxis.horizontal or DragAxis.both');
-    dev.log(_state.runtimeType.toString());
 
     ///For DragAxis.both
     ///Initialising the unused animation with the current value.
@@ -102,7 +99,6 @@ class FlipperController extends ChangeNotifier {
       _state!.animationHorizontal= AlwaysStoppedAnimation<double>(_state!.dragHorizontal);
     }
 
-    dev.log("${_state!.isInverted}");
     _state!.animationVertical= Tween<double>(
       begin: _state!.isInverted?180:0,
       end: _state!.isInverted?360:180,
