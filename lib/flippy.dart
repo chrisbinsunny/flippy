@@ -1,4 +1,4 @@
-library flipper;
+library flippy;
 
 export 'flipper/dragFlipper.dart';
 export 'flipper/regularFlipper.dart';
