@@ -1,7 +1,7 @@
 
 # Flippy- Flip it 🎡
 
-Get ready to flip your widgets like never before!   Introducing Flippy - an interactive flip widget for Flutter. Flippy is built to be highly customizable, easy to use and provides an intuitive way to flip between two sides of a card.
+Get ready to flip your widgets like never before! Introducing Flippy - an interactive flip widget for Flutter. Flippy is built to be highly customizable, easy to use and provides an intuitive way to flip between two sides of a card.
 
 
 ## Getting started
@@ -18,13 +18,13 @@ import 'package:flippy/flippy.dart';
 ```  
 
 ## Features
-
 ✅ Draggable and Non-Draggable flipper cards
 ✅ Funtions to turn to all sides
 ✅ Dynamic customisable shadow
 ✅ Complete control over widgets
 
 **TODO: Coming Soon**
+
 🟩 Animation duration
 🟩 Stop sticky animation
 🟩 Single widget flip

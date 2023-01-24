@@ -1,9 +1,9 @@
 name: flippy
 description: A flutter widget which can be flipped by button press or drag interaction and is highly customisable.
 version: 0.1.0
-homepage: https://github.com/chrisbinsunny/Flipper
-repository: https://github.com/chrisbinsunny/Flipper
-issue_tracker: https://github.com/chrisbinsunny/Flipper/issues
+homepage: https://github.com/chrisbinsunny/flippy
+repository: https://github.com/chrisbinsunny/flippy
+issue_tracker: https://github.com/chrisbinsunny/flippy/issues
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
