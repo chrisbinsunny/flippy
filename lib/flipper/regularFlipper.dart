@@ -1,10 +1,9 @@
 import 'dart:math';
 import 'dart:developer' as dev;
-import 'package:flipper/flipper.dart';
+import 'package:flippy/flippy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../shadow/blurPainter.dart';
 import '../controllers/flipperController.dart';
 
 class Flipper extends StatefulWidget {
