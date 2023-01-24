@@ -18,16 +18,16 @@ import 'package:flippy/flippy.dart';
 ```  
 
 ## Features
-✅ Draggable and Non-Draggable flipper cards
-✅ Funtions to turn to all sides
-✅ Dynamic customisable shadow
+✅ Draggable and Non-Draggable flipper cards  
+✅ Funtions to turn to all sides  
+✅ Dynamic customisable shadow  
 ✅ Complete control over widgets
 
 **TODO: Coming Soon**
 
-🟩 Animation duration
-🟩 Stop sticky animation
-🟩 Single widget flip
+🟩 Animation duration  
+🟩 Stop sticky animation  
+🟩 Single widget flip  
 🟩 Sounds on flip
 
 ## Flippy Usage
