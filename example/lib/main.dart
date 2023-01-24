@@ -1,4 +1,4 @@
-import 'package:flipper/flipper.dart';
+import 'package:flippy/flippy.dart';
 import 'package:flutter/material.dart';
 
 void main() {
