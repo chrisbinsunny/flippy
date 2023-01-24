@@ -1,11 +1,8 @@
 import 'dart:math';
-import 'dart:developer' as dev;
-import 'package:flipper/flipper.dart';
+import 'package:flippy/flippy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../shadow/blurPainter.dart';
-import '../controllers/flipperController.dart';
 
 class DragFlipper extends StatefulWidget {
   const DragFlipper(
@@ -210,7 +207,6 @@ class DragFlipperState extends State<DragFlipper>
   @override
   Widget build(BuildContext context) {
 
-dev.log("$dragHorizontal, $dragVertical");
     switch(widget.controller.dragAxis){
       case DragAxis.horizontal:
         transform = Matrix4.identity()
