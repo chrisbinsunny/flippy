@@ -1,5 +1,5 @@
 
-import 'package:flipper/controllers/flipperController.dart';
+import 'package:flippy/controllers/flipperController.dart';
 import 'package:flutter/material.dart';
 
 import 'blurPainter.dart';
