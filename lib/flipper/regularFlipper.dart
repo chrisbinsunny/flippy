@@ -1,10 +1,7 @@
 import 'dart:math';
-import 'dart:developer' as dev;
 import 'package:flippy/flippy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../controllers/flipperController.dart';
 
 class Flipper extends StatefulWidget {
   const Flipper(
