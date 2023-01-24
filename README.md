@@ -1,26 +1,34 @@
 
-# Flipper 🎡
+# Flippy- Flip it 🎡
 
-Get ready to flip your widgets like never before!   Introducing Flipper - an interactive flipper widget for Flutter. Flipper is built to be highly customizable, easy to use and provides an intuitive way to flip between two sides of a card.
+Get ready to flip your widgets like never before!   Introducing Flippy - an interactive flip widget for Flutter. Flippy is built to be highly customizable, easy to use and provides an intuitive way to flip between two sides of a card.
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
 
 ## Getting started
 
-To start using Flipper, you need to add the package to your pubspec.yaml file:
+To start using Flippy, you need to add the package to your pubspec.yaml file:
 
 ```yaml  
 dependencies:  
-   flipper: 0.0.4
+   flipper: 0.1.0
 ```  
 Import it:
 ```dart  
-import 'package:flipper/flipper.dart';
+import 'package:flippy/flippy.dart';
 ```  
 
-## Flipper Usage
+## Features
+
+- [x] Draggable and Non-Draggable flipper cards
+- [x] Funtions to turn to all sides
+- [x] Dynamic customisable shadow
+- [x] Complete control over widgets
+- [ ] Animation duration
+- [ ] Stop sticky animation
+- [ ] Single widget flip
+- [ ] Sounds on flip
+
+## Flippy Usage
 
 ### Draggable Flipper
 The Draggable Flipper provides the option to flip the Widget using both hand gesture and by using a controller and its funtions. To use the Draggable Flipper, you need to wrap the widgets that you want to flip with `DragFlipper` widget.
@@ -43,7 +51,7 @@ DragFlipper(
 ```  
 
 ### Regular Flipper
-The Regular Flipper provides the option to flip the Widget only by using a controller and its funtions. To use the Draggable Flipper, you need to wrap the widgets that you want to flip with `DragFlipper` widget.
+The Regular Flipper provides the option to flip the Widget only by using a controller and its funtions. Dragging or gestures is not supported in Regular Flipper. To use the Draggable Flipper, you need to wrap the widgets that you want to flip with `DragFlipper` widget.
 
 ```dart  
 Flipper(  
@@ -62,7 +70,7 @@ Flipper(
 )  
 ```  
 ## Controller Usage
-The FlipperController is a required parameter for both Flipper and DragFlipper. It allows you to control the animation of the flipper manually and programmatically. You can use the `controller` to add programmatic buttons, for example, to flip the flipper to the left or right.
+The FlipperController is a required parameter for both Flipper and DragFlipper. Controller allows you to control the animation of the flipper manually and programmatically. You can use the `controller` to add programmatic buttons, for example, to flip the flipper to the left or right.
 A FipperController() accepts a dragAxis paramter which defaults to `DragAxis.horizontal`.
 
 ```dart  
@@ -84,7 +92,6 @@ Please note that, if `dragAxis` is set to `DragAxis.vertical`, you can only call
 ### Example
 
 Here is an example of how to use the `FlipperController` to add a programmatic button to flip the flipper to the left.
-
 ```dart
 FlipperController flipperController= FlipperController(  
   dragAxis: DragAxis.horizontal,  
@@ -107,8 +114,25 @@ Widget build(BuildContext context) {
 ```
 
 
+
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to  
-contribute to the package, how to file issues, what response they can expect  
-from the package authors, and more.
+Find the documentation and API References [here](https://pub.dev/documentation/flippy/latest/)
+
+### Issues
+Report the found issues [here](https://github.com/chrisbinsunny/flippy/issues).
+
+###  Contributing
+
+1. Fork it (<https://github.com/chrisbinsunny/flippy/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+**Contributors**
+
+<a href="https://github.com/chrisbinsunny/flippy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=chrisbinsunny/flippy" />
+</a>
+
