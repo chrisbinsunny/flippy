@@ -8,6 +8,7 @@ Get ready to flip your widgets like never before! Introducing Flippy - an intera
 
 To start using Flippy, you need to add the package to your pubspec.yaml file:
 
+Depend on it:
 ```yaml  
 dependencies:  
    flipper: 0.1.0
@@ -37,8 +38,8 @@ The Draggable Flipper provides the option to flip the Widget using both hand ges
 
 ```dart  
 DragFlipper(  
-  front: FrontWidget(),  //required
-  back: BackWidget(),  //required
+  front: const FrontWidget(),  //required
+  back: const BackWidget(),  //required
   controller: flipperController,  //required
   height: double,  
   width: double,  
@@ -73,7 +74,7 @@ Flipper(
 ```  
 ## Controller Usage
 The FlipperController is a required parameter for both Flipper and DragFlipper. Controller allows you to control the animation of the flipper manually and programmatically. You can use the `controller` to add programmatic buttons, for example, to flip the flipper to the left or right.
-A FipperController() accepts a dragAxis paramter which defaults to `DragAxis.horizontal`.
+A ```FipperController()``` accepts a dragAxis paramter which defaults to `DragAxis.horizontal`.
 
 ```dart  
 FlipperController controller= FlipperController(  
