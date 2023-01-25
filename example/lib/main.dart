@@ -1,4 +1,5 @@
 import 'package:flippy/flippy.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -49,7 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 back: const BackWidget(),
               controller: controller,
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-              backgroundColor: const Color(0xff262424),
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xff9b96ee),
+                  Color(0xff5f5eda),
+                ]
+              ),
+              padding: EdgeInsets.zero,
               height: 210,
               showShadow: true
             ),
@@ -125,50 +132,121 @@ class FrontWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(
-          "PLATINUM",
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.white
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 33
-          ),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-
-            child: RichText(
-              text: const TextSpan(
-                  text: "Chrisbin\n",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xff5dc8f8),
-                      fontSize: 32,
-                      fontFamily: "Gilroy",
-                      letterSpacing: 1.5
-                  ),
-                  children: [
-                    TextSpan(
-                      text: "Sunny",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xff065a9d),
-                          fontSize: 35,
-                          height: 0.9,
-                          letterSpacing: 0.5
-
-                      ),
-                    ),
-                  ]
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text(
+              "PLATINUM",
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
+            Text(
+              "MOCKUP BANK",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white
+              ),
+            ),
+          ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              width: 70,
+              height: 43,
+              decoration: BoxDecoration(
+                color: const Color(0xffe0b056),
+                borderRadius: BorderRadius.circular(8)
+              ),
+            ),
+            const Text(
+              "CREDIT CARD",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text(
+              "0603",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            Text(
+              "9020",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
+            ),Text(
+              "0714",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
+            ),Text(
+              "1234",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "JANE DOE",
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                const Text(
+                  "VALID THRU 05/28",
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
 
+            const RotatedBox(
+              quarterTurns: 1,
+              child: Icon(
+                Icons.wifi,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -179,77 +257,115 @@ class BackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-
-      builder: (p0, constraints) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: constraints.maxWidth*0.65,
-              child: const FittedBox(
-                child: Text(" Chrisbin Sunny",
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Container(
+          width: double.infinity,
+          height: 43,
+          decoration: BoxDecoration(
+              color: const Color(0xffe0b056),
+              borderRadius: BorderRadius.circular(8)
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text(
+              "0603",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
               ),
             ),
-            const SizedBox(
-              height: 2,
-            ),
-            SizedBox(
-              width: constraints.maxWidth*0.6,
-              child: const FittedBox(
-                child: Text("  App Developer | Speaker",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w200
-                  ),
-                ),
+            Text(
+              "9020",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: constraints.maxWidth*0.55,
-              child: const FittedBox(
-                child: Text(
-                  " (IND)  +91 83300 70512",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300
-                  ),
-                ),
+            ),Text(
+              "0714",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
               ),
-            ),
-            const SizedBox(
-              height: 2,
-            ),
-            SizedBox(
-              width: constraints.maxWidth*0.65,
-              child: const FittedBox(
-                child: Text(
-                  " chrisbinofficial@gmail.com",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontFamily: "Gilroy",
-                      fontWeight: FontWeight.w300
-                  ),
-                ),
+            ),Text(
+              "1234",
+              style: TextStyle(
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
               ),
             ),
           ],
-        );
-      },);
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "JANE DOE",
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                const Text(
+                  "VALID THRU 05/28",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+
+            const RotatedBox(
+              quarterTurns: 1,
+              child: Icon(
+                Icons.wifi,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+
+            Text(
+              "MOCKUP BANK",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+
+              ),
+            ),
+            Text(
+              "CREDIT CARD",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
