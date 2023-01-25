@@ -1,7 +1,7 @@
 
 # Flippy- Flip it 🎡
 
-Get ready to flip your widgets like never before! Introducing Flippy - an interactive flip widget for Flutter. Flippy is built to be highly customizable, easy to use and provides an intuitive way to flip between two sides of a card.
+Flippy is an interactive flip widget for Flutter. With Flippy, you can easily customize and flip between two sides of a card in an intuitive way. This widget is built to be highly customizable and easy to use, making it the perfect addition to your Flutter app. Get ready to take your widgets to the next level with Flippy!
 
 
 ## Getting started
@@ -27,14 +27,15 @@ import 'package:flippy/flippy.dart';
 **TODO: Coming Soon**
 
 🟩 Animation duration  
-🟩 Stop sticky animation  
+🟩 Optional sticky animation  
+🟩 Thickness to card  
 🟩 Single widget flip  
 🟩 Sounds on flip
 
 ## Flippy Usage
 
 ### Draggable Flipper
-The Draggable Flipper provides the option to flip the Widget using both hand gesture and by using a controller and its funtions. To use the Draggable Flipper, you need to wrap the widgets that you want to flip with `DragFlipper` widget.
+The Draggable Flipper is a versatile flip widget for Flutter that allows you to flip your widgets using both hand gesture and a controller with its various functions. To use the Draggable Flipper, you need to wrap the widgets you want to flip with the `DragFlipper` widget and pass a `controller`.
 
 ```dart  
 DragFlipper(  
@@ -54,7 +55,7 @@ DragFlipper(
 ```  
 
 ### Regular Flipper
-The Regular Flipper provides the option to flip the Widget only by using a controller and its funtions. Dragging or gestures is not supported in Regular Flipper. To use the Draggable Flipper, you need to wrap the widgets that you want to flip with `DragFlipper` widget.
+The Regular Flipper is a flip widget for Flutter app that allows you to flip your widgets using a controller with its various functions. Unlike the Draggable Flipper, the Regular Flipper does not support dragging or gestures as a means of flipping the widget. To use the Regular Flipper, you need to wrap the widgets you want to flip with the `RegularFlipper` widget and pass a `controller`.
 
 ```dart  
 Flipper(  
@@ -73,8 +74,8 @@ Flipper(
 )  
 ```  
 ## Controller Usage
-The FlipperController is a required parameter for both Flipper and DragFlipper. Controller allows you to control the animation of the flipper manually and programmatically. You can use the `controller` to add programmatic buttons, for example, to flip the flipper to the left or right.
-A ```FipperController()``` accepts a dragAxis paramter which defaults to `DragAxis.horizontal`.
+The FlipperController is a required parameter for both Flipper and DragFlipper. Controller allows you to control the animation of the flipper manually and programmatically. By using the `controller` parameter, you can add programmatic buttons to flip the flipper to the left or right.  
+To create a FlipperController, you can use the `FlipperController()` constructor, which accepts a `dragAxis` parameter. The `dragAxis` parameter defaults to `DragAxis.horizontal`, but it can also be set to `DragAxis.vertical` and `DragAxis.both` to change the direction of the flip animation.
 
 ```dart  
 FlipperController controller= FlipperController(  
@@ -90,7 +91,7 @@ The `FlipperController` has three main methods:
 -   `flipDown()`: Flips the flipper to the bottom for one time. Only works with `DragAxis.vertical` and `DragAxis.both`.
 -    `flipUp()`: Flips the flipper to the top for one time. Only works with `DragAxis.vertical` and `DragAxis.both`.
 
-Please note that, if `dragAxis` is set to `DragAxis.vertical`, you can only call `flipDown()` and `flipUp()` and if it is set to `DragAxis.horizontal`, you can only call `flipLeft()` and `flipRight()`.
+Please note that the `dragAxis` parameter of the FlipperController determines which flipping functions can be called. If `dragAxis` is set to `DragAxis.vertical`, you can only call `flipDown()` and `flipUp()`. If it is set to `DragAxis.horizontal`, you can only call `flipLeft()` and `flipRight()`.
 
 ### Example
 
