@@ -3,33 +3,29 @@ import 'package:flippy/flippy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class DragFlipper extends StatefulWidget {
   const DragFlipper(
       {super.key,
       required this.front,
       required this.back,
-        required this.controller,
-        this.height=220,
-        this.width=324,
-        this.border,
-        this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        this.margin,
-        this.backgroundColor= const Color(0xff0c0c0c),
-        this.borderRadius,
-        this.gradient,
-        this.shape=BoxShape.rectangle,
-        this.showShadow= true
-      }):
-        assert(shape != BoxShape.circle || borderRadius == null);
-
+      required this.controller,
+      this.height = 220,
+      this.width = 324,
+      this.border,
+      this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      this.margin,
+      this.backgroundColor = const Color(0xff0c0c0c),
+      this.borderRadius,
+      this.gradient,
+      this.shape = BoxShape.rectangle,
+      this.showShadow = true})
+      : assert(shape != BoxShape.circle || borderRadius == null);
 
   /// The [controller] that controls the animation of the flipper manually. Use the [controller] to
   /// add programmatic buttons. Pass the direction of Drag to the controller.
   /// It is a required parameter.
   ///
   final FlipperController controller;
-
 
   /// The [Widget] to be shown on the front of the Flipper.
   ///
@@ -53,8 +49,6 @@ class DragFlipper extends StatefulWidget {
   /// The width is only for the interactive area of the Flipper.
   /// Defaults to 240.
   final double width;
-
-
 
   /// The [padding] to be applied inside the Flipper.
   ///
@@ -115,7 +109,6 @@ class DragFlipper extends StatefulWidget {
 
 class DragFlipperState extends State<DragFlipper>
     with SingleTickerProviderStateMixin {
-
   ///[AnimationController] to control the animation of the flipper after it is dragged.
   ///
   /// Used to restore the flipper to default state or straight state.
@@ -141,24 +134,22 @@ class DragFlipperState extends State<DragFlipper>
 
   ///[isInverted] is a boolean variable that indicates whether the current viewport shows the flipper in
   ///inverted or vertically flipped view.
-  bool isInverted=false;
+  bool isInverted = false;
 
   ///A function that is called when the drag gesture is updated.
   void Function(DragUpdateDetails)? onPanUpdate;
 
-///A function that is called when the drag gesture is ended.
+  ///A function that is called when the drag gesture is ended.
   void Function(DragEndDetails)? onPanEnd;
 
   ///[transform] is used to store the kind of transform needed for the Flipper. Value to be added inside build.
   late Matrix4 transform;
-
 
   @override
   void initState() {
     animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
-
     );
     switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
@@ -194,16 +185,15 @@ class DragFlipperState extends State<DragFlipper>
         break;
     }
 
-    widget.controller.state= this;
+    widget.controller.state = this;
     super.initState();
   }
 
   @override
   void didUpdateWidget(DragFlipper oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.controller.state= this;
+    oldWidget.controller.state = this;
   }
-
 
   @override
   void dispose() {
@@ -213,8 +203,7 @@ class DragFlipperState extends State<DragFlipper>
 
   @override
   Widget build(BuildContext context) {
-
-    switch(widget.controller.dragAxis){
+    switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
@@ -233,7 +222,6 @@ class DragFlipperState extends State<DragFlipper>
         break;
     }
 
-
     return Column(
       children: [
         GestureDetector(
@@ -247,16 +235,15 @@ class DragFlipperState extends State<DragFlipper>
             transform: transform,
             alignment: Alignment.center,
             child: ClipRRect(
-              borderRadius: widget.borderRadius??BorderRadius.zero,
+              borderRadius: widget.borderRadius ?? BorderRadius.zero,
               child: Container(
                 height: widget.height,
                 width: widget.width,
                 padding: widget.padding,
                 margin: widget.margin,
-
                 decoration: BoxDecoration(
-                    color: widget.backgroundColor,
-                    borderRadius: widget.borderRadius,
+                  color: widget.backgroundColor,
+                  borderRadius: widget.borderRadius,
                   border: widget.border,
                   gradient: widget.gradient,
                   shape: widget.shape,
@@ -272,12 +259,10 @@ class DragFlipperState extends State<DragFlipper>
             ),
           ),
         ),
-        if(widget.showShadow)
-            FlipperShadow(width: getWidth()),
+        if (widget.showShadow) FlipperShadow(width: getWidth()),
       ],
     );
   }
-
 
   ///The [findSide] method is a helper function used to determine which side of the [DragFlipper] is
   ///logically to be displayed. It uses the current [dragHorizontal] and [dragVertical] values, as well as
@@ -304,39 +289,34 @@ class DragFlipperState extends State<DragFlipper>
       } else {
         isFront = false;
       }
-    } else
-    if(widget.controller.dragAxis==DragAxis.vertical)
-    {
+    } else if (widget.controller.dragAxis == DragAxis.vertical) {
       if (dragVertical <= 90 || dragVertical >= 270) {
         isFront = true;
-        isInverted=false;
+        isInverted = false;
       } else {
         isFront = false;
-        isInverted=true;
+        isInverted = true;
       }
-    }
-    else{
-
-      if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
-        isFront=true;
-        isInverted=false;
+    } else {
+      if ((dragVertical <= 90 || dragVertical >= 270) &&
+          (dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront = true;
+        isInverted = false;
+      } else if ((dragVertical > 90 && dragVertical < 270) &&
+          (dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront = true;
+        isInverted = true;
+      } else if ((dragVertical > 90 && dragVertical < 270) &&
+          (dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront = false;
+        isInverted = true;
+      } else if ((dragVertical <= 90 || dragVertical >= 270) &&
+          (dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront = false;
+        isInverted = false;
       }
-      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
-        isFront=true;
-        isInverted=true;
-      }
-      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
-        isFront=false;
-        isInverted=true;
-      }
-      else if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
-        isFront=false;
-        isInverted=false;
-      }
-
     }
   }
-
 
   ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.vertical].
   void verticalDragUpdate(DragUpdateDetails details) {
@@ -385,18 +365,16 @@ class DragFlipperState extends State<DragFlipper>
 
   ///Function for [onPanUpdate] when the [dragAxis] is [DragAxis.both].
   void bothDragUpdate(DragUpdateDetails details) {
-    if(isInverted){
+    if (isInverted) {
       dragHorizontal += details.delta.dx;
-    }else {
+    } else {
       dragHorizontal -= details.delta.dx;
     }
     dragVertical += details.delta.dy;
     dragHorizontal %= 360;
     dragVertical %= 360;
     findSide();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   ///Function for [onPanEnd] when the [dragAxis] is [DragAxis.both].
@@ -405,20 +383,23 @@ class DragFlipperState extends State<DragFlipper>
     final xVelocity = details.velocity.pixelsPerSecond.dx.abs();
     if ((yVelocity >= 100) || (xVelocity >= 100)) {
       isFront = !isFrontStart;
-      if(yVelocity>xVelocity){
-        isInverted=!isInverted;
+      if (yVelocity > xVelocity) {
+        isInverted = !isInverted;
       }
     }
 
-
     animationVertical = Tween<double>(
       begin: dragVertical,
-      end: isInverted?180:(dragVertical > 180 ? 360 : 0),
+      end: isInverted ? 180 : (dragVertical > 180 ? 360 : 0),
     ).animate(animationController);
 
     animationHorizontal = Tween<double>(
       begin: dragHorizontal,
-      end: isFront ? (isInverted?180:(dragHorizontal>180?360:0)) : isInverted ? (dragHorizontal>180?360:0):180,
+      end: isFront
+          ? (isInverted ? 180 : (dragHorizontal > 180 ? 360 : 0))
+          : isInverted
+              ? (dragHorizontal > 180 ? 360 : 0)
+              : 180,
     ).animate(animationController);
 
     animationController.forward(from: 0);
@@ -431,5 +412,4 @@ class DragFlipperState extends State<DragFlipper>
         ? (130 + (180 - dragHorizontal) * 1.44)
         : 130 - (dragHorizontal * 1.44);
   }
-
 }

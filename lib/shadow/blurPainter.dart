@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FlipperShadowPainter extends CustomPainter {
-
   FlipperShadowPainter({
-  required this.blurSigma,
-  required this.width,
-  required this.color,
+    required this.blurSigma,
+    required this.width,
+    required this.color,
     required this.height,
   });
 
@@ -19,7 +18,7 @@ class FlipperShadowPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, blurSigma);
-    canvas.drawOval(Rect.fromLTRB(-(width), 3, width, height+3), line);
+    canvas.drawOval(Rect.fromLTRB(-(width), 3, width, height + 3), line);
   }
 
   @override

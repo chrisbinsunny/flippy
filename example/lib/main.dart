@@ -30,12 +30,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   late FlipperController controller;
 
   @override
   void initState() {
-    controller= FlipperController(
+    controller = FlipperController(
       dragAxis: DragAxis.both,
     );
     super.initState();
@@ -58,16 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             DragFlipper(
-                front: const FrontWidget(),
-                back: const BackWidget(),
+              front: const FrontWidget(),
+              back: const BackWidget(),
               controller: controller,
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-              gradient: const LinearGradient(
-                colors: [
-                  Color(0xff9b96ee),
-                  Color(0xff5f5eda),
-                ]
-              ),
+              gradient: const LinearGradient(colors: [
+                Color(0xff9b96ee),
+                Color(0xff5f5eda),
+              ]),
               padding: const EdgeInsets.symmetric(
                 vertical: 8,
               ),
@@ -80,51 +77,53 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FloatingActionButton(
-                  onPressed: (){
-                  controller.flipLeft();
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 33,
-                ),),
+                  onPressed: () {
+                    controller.flipLeft();
+                  },
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 33,
+                  ),
+                ),
                 FloatingActionButton(
-                  onPressed: (){
+                  onPressed: () {
                     controller.flipRight();
                   },
                   child: const Icon(
                     Icons.arrow_forward,
                     color: Colors.white,
                     size: 33,
-                  ),),
+                  ),
+                ),
                 FloatingActionButton(
-                  onPressed: (){
+                  onPressed: () {
                     controller.flipDown();
                   },
                   child: const Icon(
                     Icons.arrow_downward_outlined,
                     color: Colors.white,
                     size: 33,
-                  ),),
+                  ),
+                ),
                 FloatingActionButton(
-                  onPressed: (){
+                  onPressed: () {
                     controller.flipUp();
                   },
                   child: const Icon(
                     Icons.arrow_upward_outlined,
                     color: Colors.white,
                     size: 33,
-                  ),),
+                  ),
+                ),
               ],
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
 
 class FrontWidget extends StatelessWidget {
   const FrontWidget({Key? key}) : super(key: key);
@@ -142,17 +141,11 @@ class FrontWidget extends StatelessWidget {
             children: const [
               Text(
                 "PLATINUM",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white
-                ),
+                style: TextStyle(fontSize: 15, color: Colors.white),
               ),
               Text(
                 "MOCKUP BANK",
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white
-                ),
+                style: TextStyle(fontSize: 15, color: Colors.white),
               ),
             ],
           ),
@@ -164,16 +157,12 @@ class FrontWidget extends StatelessWidget {
                 width: 70,
                 height: 43,
                 decoration: BoxDecoration(
-                  color: const Color(0xffe0b056),
-                  borderRadius: BorderRadius.circular(8)
-                ),
+                    color: const Color(0xffe0b056),
+                    borderRadius: BorderRadius.circular(8)),
               ),
               const Text(
                 "CREDIT CARD",
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white
-                ),
+                style: TextStyle(fontSize: 15, color: Colors.white),
               ),
             ],
           ),
@@ -185,30 +174,28 @@ class FrontWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 27,
                     color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 "9020",
                 style: TextStyle(
                     fontSize: 27,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold
-                ),
-              ),Text(
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
                 "0714",
                 style: TextStyle(
                     fontSize: 27,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold
-                ),
-              ),Text(
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
                 "1234",
                 style: TextStyle(
                     fontSize: 27,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -224,8 +211,7 @@ class FrontWidget extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 17,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 3,
@@ -233,13 +219,12 @@ class FrontWidget extends StatelessWidget {
                   const Text(
                     "VALID THRU 05/28",
                     style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
+                      fontSize: 10,
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
-
               const RotatedBox(
                 quarterTurns: 1,
                 child: Icon(
@@ -269,30 +254,27 @@ class BackWidget extends StatelessWidget {
           width: double.infinity,
           height: 43,
           decoration: const BoxDecoration(
-              color: Color(0xff1f1e1e),
+            color: Color(0xff1f1e1e),
           ),
         ),
         Container(
-          width: 180,
-          height: 37,
-          alignment: Alignment.centerRight,
-          decoration: const BoxDecoration(
-            color: Colors.white70,
-          ),
-          child: const Text(
-            "0210  ",
-            style: TextStyle(
-              fontSize: 18
+            width: 180,
+            height: 37,
+            alignment: Alignment.centerRight,
+            decoration: const BoxDecoration(
+              color: Colors.white70,
             ),
-          )
-        ),
+            child: const Text(
+              "0210  ",
+              style: TextStyle(fontSize: 18),
+            )),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
             style: TextStyle(
-                fontSize: 13,
-                color: Colors.white,
+              fontSize: 13,
+              color: Colors.white,
             ),
           ),
         ),
@@ -301,23 +283,19 @@ class BackWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-
               Text(
                 "MOCKUP BANK",
                 style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold
-
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 "CREDIT CARD",
                 style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),

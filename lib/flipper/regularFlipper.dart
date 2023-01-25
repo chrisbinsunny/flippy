@@ -8,27 +8,24 @@ class Flipper extends StatefulWidget {
       {super.key,
       required this.front,
       required this.back,
-        required this.controller,
-        this.height=220,
-        this.width=324,
-        this.border,
-        this.padding= const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        this.margin,
-        this.backgroundColor= const Color(0xff0c0c0c),
-        this.borderRadius,
-        this.gradient,
-        this.shape=BoxShape.rectangle,
-        this.showShadow= true
-      }):
-        assert(shape != BoxShape.circle || borderRadius == null);
-
+      required this.controller,
+      this.height = 220,
+      this.width = 324,
+      this.border,
+      this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      this.margin,
+      this.backgroundColor = const Color(0xff0c0c0c),
+      this.borderRadius,
+      this.gradient,
+      this.shape = BoxShape.rectangle,
+      this.showShadow = true})
+      : assert(shape != BoxShape.circle || borderRadius == null);
 
   /// The [controller] that controls the animation of the flipper manually. Use the [controller] to
   /// add programmatic buttons. Pass the direction of Drag to the controller.
   /// It is a required parameter.
   ///
   final FlipperController controller;
-
 
   /// The [Widget] to be shown on the front of the Flipper.
   ///
@@ -52,8 +49,6 @@ class Flipper extends StatefulWidget {
   /// The width is only for the interactive area of the Flipper.
   /// Defaults to 240.
   final double width;
-
-
 
   /// The [padding] to be applied inside the Flipper.
   ///
@@ -112,9 +107,7 @@ class Flipper extends StatefulWidget {
   State<Flipper> createState() => FlipperState();
 }
 
-class FlipperState extends State<Flipper>
-    with SingleTickerProviderStateMixin {
-
+class FlipperState extends State<Flipper> with SingleTickerProviderStateMixin {
   ///[AnimationController] to control the animation of the flipper after it is dragged.
   ///
   /// Used to restore the flipper to default state or straight state.
@@ -140,18 +133,16 @@ class FlipperState extends State<Flipper>
 
   ///[isInverted] is a boolean variable that indicates whether the current viewport shows the flipper in
   ///inverted or vertically flipped view.
-  bool isInverted=false;
+  bool isInverted = false;
 
   ///[transform] is used to store the kind of transform needed for the Flipper. Value to be added inside build.
   late Matrix4 transform;
-
 
   @override
   void initState() {
     animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
-
     );
     switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
@@ -181,16 +172,15 @@ class FlipperState extends State<Flipper>
         break;
     }
 
-    widget.controller.state= this;
+    widget.controller.state = this;
     super.initState();
   }
 
   @override
   void didUpdateWidget(Flipper oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.controller.state= this;
+    oldWidget.controller.state = this;
   }
-
 
   @override
   void dispose() {
@@ -200,8 +190,7 @@ class FlipperState extends State<Flipper>
 
   @override
   Widget build(BuildContext context) {
-
-    switch(widget.controller.dragAxis){
+    switch (widget.controller.dragAxis) {
       case DragAxis.horizontal:
         transform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
@@ -220,22 +209,21 @@ class FlipperState extends State<Flipper>
         break;
     }
 
-
     return Column(
       children: [
         Transform(
           transform: transform,
           alignment: Alignment.center,
           child: ClipRRect(
-            borderRadius: widget.borderRadius??BorderRadius.zero,
+            borderRadius: widget.borderRadius ?? BorderRadius.zero,
             child: Container(
               height: widget.height,
               width: widget.width,
               padding: widget.padding,
               margin: widget.margin,
               decoration: BoxDecoration(
-                  color: widget.backgroundColor,
-                  borderRadius: widget.borderRadius,
+                color: widget.backgroundColor,
+                borderRadius: widget.borderRadius,
                 border: widget.border,
                 gradient: widget.gradient,
                 shape: widget.shape,
@@ -250,12 +238,10 @@ class FlipperState extends State<Flipper>
             ),
           ),
         ),
-        if(widget.showShadow)
-          FlipperShadow(width: getWidth()),
+        if (widget.showShadow) FlipperShadow(width: getWidth()),
       ],
     );
   }
-
 
   ///The [findSide] method is a helper function used to determine which side of the [Flipper] is
   ///logically to be displayed. It uses the current [dragHorizontal] and [dragVertical] values, as well as
@@ -282,36 +268,32 @@ class FlipperState extends State<Flipper>
       } else {
         isFront = false;
       }
-    } else
-    if(widget.controller.dragAxis==DragAxis.vertical)
-    {
+    } else if (widget.controller.dragAxis == DragAxis.vertical) {
       if (dragVertical <= 90 || dragVertical >= 270) {
         isFront = true;
-        isInverted=false;
+        isInverted = false;
       } else {
         isFront = false;
-        isInverted=true;
+        isInverted = true;
       }
-    }
-    else{
-
-      if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
-        isFront=true;
-        isInverted=false;
+    } else {
+      if ((dragVertical <= 90 || dragVertical >= 270) &&
+          (dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront = true;
+        isInverted = false;
+      } else if ((dragVertical > 90 && dragVertical < 270) &&
+          (dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront = true;
+        isInverted = true;
+      } else if ((dragVertical > 90 && dragVertical < 270) &&
+          (dragHorizontal <= 90 || dragHorizontal >= 270)) {
+        isFront = false;
+        isInverted = true;
+      } else if ((dragVertical <= 90 || dragVertical >= 270) &&
+          (dragHorizontal > 90 && dragHorizontal < 270)) {
+        isFront = false;
+        isInverted = false;
       }
-      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
-        isFront=true;
-        isInverted=true;
-      }
-      else if((dragVertical > 90 && dragVertical < 270)&&(dragHorizontal <= 90 || dragHorizontal >= 270)) {
-        isFront=false;
-        isInverted=true;
-      }
-      else if((dragVertical <= 90 || dragVertical >= 270)&&(dragHorizontal > 90 && dragHorizontal < 270)) {
-        isFront=false;
-        isInverted=false;
-      }
-
     }
   }
 

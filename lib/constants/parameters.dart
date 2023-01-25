@@ -1,7 +1,1 @@
-
-enum DragAxis {
-  horizontal,
-  vertical,
-  both
-}
-
+enum DragAxis { horizontal, vertical, both }
