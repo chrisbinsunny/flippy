@@ -1,5 +1,4 @@
 
-import 'package:flippy/controllers/flipperController.dart';
 import 'package:flutter/material.dart';
 
 import 'blurPainter.dart';
@@ -7,7 +6,7 @@ import 'blurPainter.dart';
 class FlipperShadow extends StatelessWidget {
   const FlipperShadow({
     Key? key,
-    required this.controller,
+    required this.width,
     this.blurSigma=11,
     this. height= 7,
     this.color=const Color(0xff8a8a8a),
@@ -15,8 +14,7 @@ class FlipperShadow extends StatelessWidget {
 
   }) : super(key: key);
 
-  final FlipperController controller;
-  final double blurSigma, height, spacing;
+  final double blurSigma, height, spacing, width;
   final Color color;
 
   @override
@@ -29,7 +27,7 @@ class FlipperShadow extends StatelessWidget {
 
         painter: FlipperShadowPainter(
           blurSigma: blurSigma,
-          width: controller.getWidth(),
+          width: width,
           color: color,
           height:height,
         ),
