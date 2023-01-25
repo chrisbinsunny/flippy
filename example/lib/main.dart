@@ -45,10 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             DragFlipper(
+                front: const FrontWidget(),
+                back: const BackWidget(),
               controller: controller,
-              //borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-              front: const FrontWidget(),
-              back: const BackWidget(),
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              backgroundColor: const Color(0xff262424),
+              height: 210,
               showShadow: true
             ),
             const SizedBox(
@@ -121,55 +123,53 @@ class FrontWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (p0, constraints) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                  height: constraints.maxHeight*0.1
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 33
-                ),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "PLATINUM",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 33
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
 
-                  child: RichText(
-                    text: const TextSpan(
-                        text: "Chrisbin\n",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xff5dc8f8),
-                            fontSize: 32,
-                            fontFamily: "Gilroy",
-                            letterSpacing: 1.5
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "Sunny",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xff065a9d),
-                                fontSize: 35,
-                                height: 0.9,
-                                letterSpacing: 0.5
-
-                            ),
-                          ),
-                        ]
-                    ),
-                    textAlign: TextAlign.center,
+            child: RichText(
+              text: const TextSpan(
+                  text: "Chrisbin\n",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xff5dc8f8),
+                      fontSize: 32,
+                      fontFamily: "Gilroy",
+                      letterSpacing: 1.5
                   ),
-                ),
-              ),
+                  children: [
+                    TextSpan(
+                      text: "Sunny",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff065a9d),
+                          fontSize: 35,
+                          height: 0.9,
+                          letterSpacing: 0.5
 
-            ],
-          );}
+                      ),
+                    ),
+                  ]
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+
+      ],
     );
   }
 }
