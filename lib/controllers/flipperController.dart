@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flippy/constants/parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +11,8 @@ class FlipperController extends ChangeNotifier {
     this.dragAxis = DragAxis.horizontal,
   });
   dynamic _state;
+  double _shadowWidth=0;
+
 
   /// The internal widget state.
   /// Use only if you know what you're doing!
@@ -138,11 +142,4 @@ class FlipperController extends ChangeNotifier {
   }
 
 
-  ///For finding width for shadow.
-  //TODO
-  getWidth() {
-    return _state!.dragHorizontal > 180
-        ? (130 + (180 - _state!.dragHorizontal) * 1.44)
-        : 130 - (_state!.dragHorizontal * 1.44);
-  }
 }
