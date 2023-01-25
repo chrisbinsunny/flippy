@@ -18,7 +18,8 @@ class DragFlipper extends StatefulWidget {
         this.backgroundColor= const Color(0xff0c0c0c),
         this.borderRadius,
         this.gradient,
-        this.shape=BoxShape.rectangle
+        this.shape=BoxShape.rectangle,
+        this.showShadow= true
       }):
         assert(shape != BoxShape.circle || borderRadius == null);
 
@@ -101,6 +102,12 @@ class DragFlipper extends StatefulWidget {
   /// If this is [BoxShape.circle] then [borderRadius] is ignored.
   /// Defaults to [BoxShape.rectangle].
   final BoxShape shape;
+
+  /// [FlipperShadow] to be shown under the Flipper widget.
+  ///
+  /// The size and color changes dynamically on drag and flip.
+  /// Defaults to `true`.
+  final bool showShadow;
 
   @override
   State<DragFlipper> createState() => DragFlipperState();
@@ -227,41 +234,47 @@ class DragFlipperState extends State<DragFlipper>
     }
 
 
-    return GestureDetector(
-      onPanStart: (detail) {
-        animationController.stop();
-        isFrontStart = isFront;
-      },
-      onPanUpdate: onPanUpdate,
-      onPanEnd: onPanEnd,
-      child: Transform(
-        transform: transform,
-        alignment: Alignment.center,
-        child: ClipRRect(
-          borderRadius: widget.borderRadius??BorderRadius.zero,
-          child: Container(
-            height: widget.height,
-            width: widget.width,
-            padding: widget.padding,
-            margin: widget.margin,
+    return Column(
+      children: [
+        GestureDetector(
+          onPanStart: (detail) {
+            animationController.stop();
+            isFrontStart = isFront;
+          },
+          onPanUpdate: onPanUpdate,
+          onPanEnd: onPanEnd,
+          child: Transform(
+            transform: transform,
+            alignment: Alignment.center,
+            child: ClipRRect(
+              borderRadius: widget.borderRadius??BorderRadius.zero,
+              child: Container(
+                height: widget.height,
+                width: widget.width,
+                padding: widget.padding,
+                margin: widget.margin,
 
-            decoration: BoxDecoration(
-                color: widget.backgroundColor,
-                borderRadius: widget.borderRadius,
-              border: widget.border,
-              gradient: widget.gradient,
-              shape: widget.shape,
+                decoration: BoxDecoration(
+                    color: widget.backgroundColor,
+                    borderRadius: widget.borderRadius,
+                  border: widget.border,
+                  gradient: widget.gradient,
+                  shape: widget.shape,
+                ),
+                child: isFront
+                    ? widget.front
+                    : Transform(
+                        transform: Matrix4.identity()..rotateY(pi),
+                        alignment: Alignment.center,
+                        child: widget.back,
+                      ),
+              ),
             ),
-            child: isFront
-                ? widget.front
-                : Transform(
-                    transform: Matrix4.identity()..rotateY(pi),
-                    alignment: Alignment.center,
-                    child: widget.back,
-                  ),
           ),
         ),
-      ),
+        if(widget.showShadow)
+            FlipperShadow(width: getWidth()),
+      ],
     );
   }
 
@@ -410,4 +423,13 @@ class DragFlipperState extends State<DragFlipper>
 
     animationController.forward(from: 0);
   }
+
+  ///For finding width for shadow.
+  //TODO
+  getWidth() {
+    return dragHorizontal > 180
+        ? (130 + (180 - dragHorizontal) * 1.44)
+        : 130 - (dragHorizontal * 1.44);
+  }
+
 }
