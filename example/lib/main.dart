@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flippy Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -30,10 +31,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  FlipperController controller= FlipperController(
-    dragAxis: DragAxis.horizontal,
-  );
+  late FlipperController controller;
 
+  @override
+  void initState() {
+    controller= FlipperController(
+      dragAxis: DragAxis.both,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,62 +72,49 @@ class _MyHomePageState extends State<MyHomePage> {
                 vertical: 8,
               ),
               height: 210,
-              showShadow: true
             ),
             const SizedBox(
               height: 40,
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
-                IconButton(
-                    onPressed: (){
-                      controller.flipLeft();
-
-                    },
-                    icon: const Icon(
-                      Icons.arrow_circle_left_outlined,
-                      color: Colors.red,
-                      size: 30,
-                    )
-                ),
-                IconButton(
-                    onPressed: (){
-                      controller.flipRight();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_circle_right_outlined,
-                      color: Colors.red,
-                      size: 30,
-                    )
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    onPressed: (){
-                      controller.flipDown();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_circle_down_outlined,
-                      color: Colors.red,
-                      size: 30,
-                    )
-                ),
-                IconButton(
-                    onPressed: (){
-                      controller.flipUp();
-
-                    },
-                    icon: const Icon(
-                      Icons.arrow_circle_up_outlined,
-                      color: Colors.red,
-                      size: 30,
-                    )
-                )
+                FloatingActionButton(
+                  onPressed: (){
+                  controller.flipLeft();
+                },
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 33,
+                ),),
+                FloatingActionButton(
+                  onPressed: (){
+                    controller.flipRight();
+                  },
+                  child: const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 33,
+                  ),),
+                FloatingActionButton(
+                  onPressed: (){
+                    controller.flipDown();
+                  },
+                  child: const Icon(
+                    Icons.arrow_downward_outlined,
+                    color: Colors.white,
+                    size: 33,
+                  ),),
+                FloatingActionButton(
+                  onPressed: (){
+                    controller.flipUp();
+                  },
+                  child: const Icon(
+                    Icons.arrow_upward_outlined,
+                    color: Colors.white,
+                    size: 33,
+                  ),),
               ],
             ),
 
@@ -280,15 +279,15 @@ class BackWidget extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Colors.white70,
           ),
-          child: Text(
+          child: const Text(
             "0210  ",
             style: TextStyle(
               fontSize: 18
             ),
           )
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
             style: TextStyle(
