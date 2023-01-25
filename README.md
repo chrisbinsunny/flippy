@@ -3,7 +3,7 @@
 
 Flippy is an interactive flip widget for Flutter. With Flippy, you can easily customize and flip between two sides of a card in an intuitive way. This widget is built to be highly customizable and easy to use, making it the perfect addition to your Flutter app. Get ready to take your widgets to the next level with Flippy!
 
-| ![Regular Flipper](docs/regularFlipper.gif) | ![Draggable Flipper](docs/dragFlipper.gif) |
+| ![Regular Flipper](doc/regularFlipper.gif) | ![Draggable Flipper](doc/dragFlipper.gif) |
 |--|--|
 | **Flipper** | **DragFlipper** |
 
