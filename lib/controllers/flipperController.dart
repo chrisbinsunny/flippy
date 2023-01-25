@@ -11,7 +11,6 @@ class FlipperController extends ChangeNotifier {
     this.dragAxis = DragAxis.horizontal,
   });
   dynamic _state;
-  double _shadowWidth=0;
 
 
   /// The internal widget state.
